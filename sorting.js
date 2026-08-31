@@ -1,19 +1,69 @@
 let arr = [];
+let timeComplexityValue = document.querySelector(".timeComplexity-value");
+let spaceComplexityValue = document.querySelector(".spaceComplexity-value");
+let timeSeconds = document.querySelector(".time-seconds");
+let learnMoreDiv = document.querySelector(".learnMore");
 
-for (let i = 0; i < 100; i++) {
+let sizeBar = document.querySelector("#size-slider");
+let n = sizeBar.value;
+
+let speedBar = document.querySelector("#speed-slider");
+let pause_play_btn = document.querySelector(".pause-play-button");
+let pause_play_status = document.querySelector(".pause-play-status");
+
+let pauseScene = false;
+
+
+for (let i = 0; i < n; i++) {
     arr.push(Math.floor(Math.random() * 100));
 }
 
 let heights = document.querySelector(".heights");
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < n; i++) {
     let height_bar = document.createElement("div");
+    height_bar.style.marginTop = "1.5px";
     height_bar.id = `height${i}`;
     height_bar.style.backgroundColor = "yellow";
     height_bar.style.width = "2vmin";
     height_bar.style.height = `${arr[i]}%`;
     heights.append(height_bar);
 }
+
+function generateArray() {
+    arr = [];
+    heights.innerHTML = "";
+
+    n = Number(sizeBar.value);
+
+    for (let i = 0; i < n; i++) {
+        arr.push(Math.floor(Math.random() * 100));
+    }
+
+    for (let i = 0; i < n; i++) {
+        let height_bar = document.createElement("div");
+        height_bar.style.marginTop = "1.5px";
+        height_bar.id = `height${i}`;
+        height_bar.style.backgroundColor = "yellow";
+        height_bar.style.width = "2vmin";
+        height_bar.style.height = `${arr[i]}%`;
+        heights.append(height_bar);
+    }
+
+}
+function getSpeed() {
+    let speed = Number(speedBar.value);
+
+    if (speed === 1) return 500;
+    if (speed === 2) return 250;
+    if (speed === 3) return 100;
+    if (speed === 4) return 50;
+    if (speed === 5) return 10;
+}
+
+sizeBar.addEventListener("input", () => {
+    generateArray();
+});
 
 let newArrBtn = document.querySelector("#new-array");
 
@@ -31,8 +81,21 @@ function swap(i, j) {
 
 }
 
-function sleep(ms){
+function updateBar(i) {
+
+    let bar = document.querySelector(`#height${i}`);
+    bar.style.height = `${arr[i]}%`;
+}
+
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function checkIfPaused(){
+
+    while(pauseScene){
+        await sleep(100);
+    }
 }
 
 function highlight(i, j) {
@@ -43,31 +106,53 @@ function highlight(i, j) {
     bar2.style.backgroundColor = `green`;
 }
 
+function startTimer() {
+    return performance.now();
+}
+
+function stopTimer(startTimer) {
+    let endTime = performance.now();
+
+    let elapsedTime = (endTime - startTimer) / 1000;
+
+    timeSeconds.innerText = `${elapsedTime.toFixed(3)}s`;
+}
+
+function runTimer(startTimer) {
+
+    let endTime = performance.now();
+    let elapsedTime = (endTime - startTimer) / 1000;
+
+    timeSeconds.innerText = `${elapsedTime.toFixed(2)}s`;
+}
 
 
 newArrBtn.addEventListener("click", () => {
-    arr = [];
 
-    for (let i = 0; i < 100; i++) {
-        const elementToDelete = document.querySelector(`#height${i}`);
-        elementToDelete.remove();
-    }
-    for (let i = 0; i < 100; i++) {
-        arr.push(Math.floor(Math.random() * 100));
-    }
+    timeComplexityValue.innerText = "-";
+    spaceComplexityValue.innerText = "-";
+    generateArray();
+    timeSeconds.innerText = "0.00s"
 
-    for (let i = 0; i < 100; i++) {
-        let height_bar = document.createElement("div");
-        height_bar.id = `height${i}`;
-        height_bar.style.backgroundColor = "yellow";
-        height_bar.style.width = "2vmin";
-        height_bar.style.height = `${arr[i]}%`;
-        heights.append(height_bar);
+});
+
+pause_play_btn.addEventListener("click", () => {
+    if (pauseScene == false) {
+        pause_play_btn.innerHTML = "";
+        pause_play_btn.innerHTML = "<i class='fa-solid fa-play'></i>";
+        pauseScene = true;
+        pause_play_status.innerText = "play";
+    }
+    else {
+        pause_play_btn.innerHTML = "";
+        pause_play_btn.innerHTML = "<i class='fa-solid fa-pause'>";
+        pauseScene = false;
+        pause_play_status.innerText = "pause";
     }
 
 });
 
-function resetColor(i, j){
+function resetColor(i, j) {
     let bar1 = document.querySelector(`#height${i}`);
     let bar2 = document.querySelector(`#height${j}`);
 
@@ -76,38 +161,203 @@ function resetColor(i, j){
 }
 
 let bubbleSortBtn = document.querySelector("#bubbleSort");
+let insertionSortBtn = document.querySelector("#insertionSort");
+let selectionSortBtn = document.querySelector("#selectionSort");
+let quickSortBtn = document.querySelector("#quickSort");
 
-async function bubbleSort(){
+async function bubbleSort() {
 
-    
+    timeComplexityValue.innerText = "O(n²)";
+    spaceComplexityValue.innerText = "O(1)";
 
-    for(let i = 0; i<arr.length; i++){
-        let flag=0;
-        for(let j = 0; j<arr.length-i-1; j++){
+    let startTime = startTimer();
 
-            highlight(j, j+1);
 
-            await sleep(0.000001);
+    for (let i = 0; i < arr.length; i++) {
+        let flag = 0;
+        for (let j = 0; j < arr.length - i - 1; j++) {
 
-            if(arr[j]>arr[j+1]){
-                flag=1;
-                swap(j, j+1);
+            await checkIfPaused();
+
+            highlight(j, j + 1);
+
+            await sleep(getSpeed());
+
+            runTimer(startTime);
+
+            if (arr[j] > arr[j + 1]) {
+                flag = 1;
+                swap(j, j + 1);
             }
-            resetColor(j, j+1);
+            resetColor(j, j + 1);
 
 
-            await sleep(0.000001);
+            await sleep(getSpeed());
         }
-        if(flag==0){
+        if (flag == 0) {
             break;
         }
     }
+
+    runTimer(startTime);
+
 }
 
-bubbleSortBtn.addEventListener("click", async ()=>{
+async function insertionSort() {
+
+    timeComplexityValue.innerText = "O(n²)";
+    spaceComplexityValue.innerText = "O(1)";
+
+
+    let startTime = startTimer();
+
+    for (let i = 1; i < arr.length; i++) {
+
+        let key = arr[i];
+        let j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+
+            await checkIfPaused();
+
+            highlight(j, j + 1);
+
+            await sleep(getSpeed());
+
+            runTimer(startTime);
+
+            arr[j + 1] = arr[j];
+
+            updateBar(j + 1);
+            resetColor(j, j + 1);
+
+            j--;
+
+
+            await sleep(getSpeed());
+        }
+
+        arr[j + 1] = key;
+
+        updateBar(j + 1);
+
+        await sleep(getSpeed());
+    }
+
+    runTimer(startTime);
+}
+
+async function selectionSort() {
+
+    timeComplexityValue.innerText = "O(n²)";
+    spaceComplexityValue.innerText = "O(1)";
+    let startTime = startTimer();
+
+    for (let i = 0; i < arr.length - 1; i++) {
+        let minIndex = i;
+
+        for (let j = i + 1; j < arr.length; j++) {
+
+            await checkIfPaused();
+
+            highlight(i, j);
+
+            await sleep(getSpeed());
+
+            runTimer(startTime);
+
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+
+            resetColor(i, j);
+        }
+
+
+        swap(i, minIndex);
+
+        await sleep(getSpeed());
+    }
+
+    runTimer(startTime);
+}
+
+async function partition(low, high){
+    let pivot = arr[high];
+    
+    let i = low-1;
+    for(let j = low; j < high; j++){
+
+        await checkIfPaused();
+        highlight(j, high);
+        await sleep(getSpeed());
+
+        if(arr[j]<=pivot){
+            i++;
+            swap(i, j);
+        }
+
+        resetColor(j, high);
+    }
+
+    await checkIfPaused();
+
+    swap(i+1, high);
+
+    await sleep(getSpeed());
+
+    return i+1;
+}
+
+async function quickSort(low, high) {
+    timeComplexityValue.innerText = "O(nlogn)";
+    spaceComplexityValue.innerText = "O(1)";
+
+
+    if(low < high){
+        let pi = await partition(low, high);
+
+        await quickSort(low, pi-1);
+        await quickSort(pi+1, high);
+    }
+
+}
+
+
+
+bubbleSortBtn.addEventListener("click", async () => {
     bubbleSortBtn.style.backgroundColor = "green";
     bubbleSortBtn.style.color = "white";
     await bubbleSort();
     bubbleSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     bubbleSortBtn.style.color = "blue";
 });
+
+insertionSortBtn.addEventListener("click", async () => {
+    insertionSortBtn.style.backgroundColor = "green";
+    insertionSortBtn.style.color = "white";
+    await insertionSort();
+    insertionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    insertionSortBtn.style.color = "blue";
+});
+
+selectionSortBtn.addEventListener("click", async () => {
+    selectionSortBtn.style.backgroundColor = "green";
+    selectionSortBtn.style.color = "white";
+    await selectionSort();
+    selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    selectionSortBtn.style.color = "blue";
+});
+
+quickSortBtn.addEventListener("click", async ()=>{
+    quickSortBtn.style.backgroundColor = "green";
+    quickSortBtn.style.color = "white";
+    let startTime = startTimer();
+    await quickSort(0, arr.length - 1);
+    stopTimer(startTime);
+    quickSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    quickSortBtn.style.color = "blue";
+});
+
+
+

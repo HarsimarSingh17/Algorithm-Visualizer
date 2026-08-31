@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
@@ -17,17 +18,77 @@
             <button id="new-array">new array</button>
         </div>
 
+        <div class="size-container">
+            <p id="size-title">size of the array</p>
+            <input type="range" min="10" max="50" step="1" value = "30" id="size-slider">
+            <div class="size-map">
+                <p>10</p>
+                <p>20</p>
+                <p>30</p>
+                <p>40</p>
+                <p>50</p>
+            </div>
+        </div>
+
+        <div class="speed-container">
+            <p id="speed-title">algorithm speed control</p>
+            <input type="range" min="1" max="5" step="1" value = "3" id="speed-slider">
+            <div class="speed-map">
+                <p>min</p>
+                <p>med</p>
+                <p>max</p>
+            </div>
+        </div>
+
+        <div class="pause-play">
+            <button class="pause-play-button"><i class="fa-solid fa-pause"></i></button>
+            <div class="pause-play-status">pause</div>
+        </div>
+
         <div class="sorting-methods-div">
             <button class="sorting-methods" id="bubbleSort">Bubble Sort</button>
-            <button class="sorting-methods">Insertion Sort</button>
-            <button class="sorting-methods">Selection Sort</button>
-            <button class="sorting-methods">Quick Sort</button>
+            <button class="sorting-methods" id="insertionSort">Insertion Sort</button>
+            <button class="sorting-methods" id="selectionSort">Selection Sort</button>
+            <button class="sorting-methods" id="quickSort">Quick Sort</button>
             <button class="sorting-methods">Merge Sort</button>
         </div>
     </div>
     <div class="heights">
-        
+
     </div>
+    <div class="optInfo">
+        <div class="timeComplexity">
+            <div class="TCtext">
+                Time Complexity
+            </div>
+            <div class="timeComplexity-value">
+                -
+            </div>
+        </div>
+        <div class="spaceComplexity">
+            <div class="SCtext">
+                Space Complexity
+            </div>
+            <div class="spaceComplexity-value">
+                -
+            </div>
+        </div>
+        <div class="time">
+            <div class="time-text">
+                Time
+            </div>
+            <div class="time-seconds">
+                0.00s
+            </div>
+        </div>
+    </div>
+
+    <div class="learnMore">
+        Want to learn more about sorting ?  <a href=""> Click Here</a>
+    </div>
+
+
+
     <script src="sorting.js"></script>
 </body>
 
