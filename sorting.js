@@ -1,9 +1,8 @@
 let arr = [];
-let timeComplexityValue = document.querySelector(".timeComplexity-value");
-let spaceComplexityValue = document.querySelector(".spaceComplexity-value");
-let timeSeconds = document.querySelector(".time-seconds");
-let learnMoreDiv = document.querySelector(".learnMore");
 let graph = document.querySelector(".axis-box");
+let sizeTitle = document.querySelector("#size-title");
+let speedTitle = document.querySelector("#speed-title");
+let axisBox = document.querySelector(".axis-box");
 
 let sizeBar = document.querySelector("#size-slider");
 let n = sizeBar.value;
@@ -13,6 +12,12 @@ let pause_play_btn = document.querySelector(".pause-play-button");
 let pause_play_status = document.querySelector(".pause-play-status");
 
 let pauseScene = false;
+
+let bestTimeComplexity = document.querySelector(".best-case-value");
+let worstTimeComplexity = document.querySelector(".worst-case-value");
+let avgTimeComplexity = document.querySelector(".avg-case-value");
+let spaceComplexity = document.querySelector(".spaceComplexity-value");
+let timeDisplay = document.querySelector(".time-value");
 
 
 for (let i = 0; i < n; i++) {
@@ -26,7 +31,7 @@ for (let i = 0; i < n; i++) {
     height_bar.style.marginTop = "1.5px";
     height_bar.id = `height${i}`;
     height_bar.style.backgroundColor = "yellow";
-    height_bar.style.width = "2vmin";
+    height_bar.style.width = `${(100 - n)}%`;
     height_bar.style.height = `${arr[i]}%`;
     heights.append(height_bar);
 }
@@ -46,7 +51,7 @@ function generateArray() {
         height_bar.style.marginTop = "1.5px";
         height_bar.id = `height${i}`;
         height_bar.style.backgroundColor = "yellow";
-        height_bar.style.width = "2vmin";
+        height_bar.style.width = `${(100 - n)}%`;
         height_bar.style.height = `${arr[i]}%`;
         heights.append(height_bar);
     }
@@ -62,9 +67,79 @@ function getSpeed() {
     if (speed === 5) return 10;
 }
 
+speedBar.addEventListener("input", () => {
+    let speedInMS = getSpeed();
+
+    if (speedInMS === 5) {
+        speedInMS = 500;
+    }
+    else if (speedInMS === 4) {
+        speedInMS = 250;
+    }
+    else if (speedInMS === 3) {
+        speedInMS = 100;
+    }
+    else if (speedInMS === 2) {
+        speedInMS = 50;
+    }
+    else if (speedInMS === 1) {
+        speedInMS = 10;
+    }
+    speedTitle.innerText = `Speed : ${speedInMS}ms`;
+});
+
+
+
 sizeBar.addEventListener("input", () => {
+    bestTimeComplexity.innerText = "-";
+    worstTimeComplexity.innerText = "-";
+    avgTimeComplexity.innerText = "-";
+
+    spaceComplexity.innerText = "-";
+
+    timeDisplay.innerText = "0.00s"
+
+    let size = Number(sizeBar.value);
+    sizeTitle.innerText = `Size : ${size}`;
     generateArray();
 });
+
+let timerRunning = false;
+let timerAnimation;
+
+function startTimer() {
+    let startTime = performance.now();
+
+    timerRunning = true;
+
+    function updateTimer() {
+        if (timerRunning == false) {
+            return;
+        }
+
+        let currentTime = performance.now();
+        let elapsedTime = (currentTime - startTime) / 1000;
+
+        timeDisplay.innerHTML = `${elapsedTime.toFixed(3)}s`;
+
+        timerAnimation = requestAnimationFrame(updateTimer);
+    }
+
+    updateTimer();
+
+    return startTime;
+}
+
+function stopTimer(startTimer) {
+    timerRunning = false;
+    cancelAnimationFrame(timerAnimation);
+
+    let endTime = performance.now();
+
+    let elapsedTime = (endTime - startTimer) / 1000;
+
+    timeDisplay.innerText = `${elapsedTime.toFixed(3)}s`;
+}
 
 let newArrBtn = document.querySelector("#new-array");
 
@@ -104,46 +179,31 @@ function highlight(i, color) {
     bar1.style.backgroundColor = `${color}`;
 }
 
-function startTimer() {
-    return performance.now();
-}
-
-function stopTimer(startTimer) {
-    let endTime = performance.now();
-
-    let elapsedTime = (endTime - startTimer) / 1000;
-
-    timeSeconds.innerText = `${elapsedTime.toFixed(3)}s`;
-}
-
-function runTimer(startTimer) {
-
-    let endTime = performance.now();
-    let elapsedTime = (endTime - startTimer) / 1000;
-
-    timeSeconds.innerText = `${elapsedTime.toFixed(2)}s`;
-}
-
-
 newArrBtn.addEventListener("click", () => {
 
-    timeComplexityValue.innerText = "-";
-    spaceComplexityValue.innerText = "-";
+    bestTimeComplexity.innerText = "-";
+    worstTimeComplexity.innerText = "-";
+    avgTimeComplexity.innerText = "-";
+
+    spaceComplexity.innerText = "-";
+    timeDisplay.innerText = "0.00s"
+
+
     generateArray();
-    timeSeconds.innerText = "0.00s"
+
 
 });
 
 pause_play_btn.addEventListener("click", () => {
     if (pauseScene == false) {
         pause_play_btn.innerHTML = "";
-        pause_play_btn.innerHTML = "<i class='fa-solid fa-play'></i>";
+        pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-play'></i>";
         pauseScene = true;
         pause_play_status.innerText = "play";
     }
     else {
         pause_play_btn.innerHTML = "";
-        pause_play_btn.innerHTML = "<i class='fa-solid fa-pause'>";
+        pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
         pauseScene = false;
         pause_play_status.innerText = "pause";
     }
@@ -166,12 +226,6 @@ let mergeSortBtn = document.querySelector("#mergeSort");
 
 async function bubbleSort() {
 
-    timeComplexityValue.innerText = "O(n²)";
-    spaceComplexityValue.innerText = "O(1)";
-
-    let startTime = startTimer();
-
-
     for (let i = 0; i < arr.length; i++) {
         let flag = 0;
         for (let j = 0; j < arr.length - i - 1; j++) {
@@ -181,9 +235,8 @@ async function bubbleSort() {
             highlight(j, "green");
             highlight(j + 1, "green");
 
-            await sleep(getSpeed());
-
-            runTimer(startTime);
+            let speedInMS = getSpeed();
+            await sleep(speedInMS);
 
             if (arr[j] > arr[j + 1]) {
                 flag = 1;
@@ -193,30 +246,18 @@ async function bubbleSort() {
             resetColor(j + 1);
 
 
-            await sleep(getSpeed());
+            speedInMS = getSpeed();
+            await sleep(speedInMS);
+
         }
         if (flag == 0) {
             break;
         }
     }
 
-    runTimer(startTime);
-
-    let graph_bar = document.createElement("div");
-    graph_bar.style.backgroundColor = "green";
-    let graph_bar_height = Number(timeSeconds.innerText.slice(0, -1));
-    graph_bar.style.height = `${graph_bar_height}%`;
-    graph.append(graph_bar);
-
 }
 
 async function insertionSort() {
-
-    timeComplexityValue.innerText = "O(n²)";
-    spaceComplexityValue.innerText = "O(1)";
-
-
-    let startTime = startTimer();
 
     for (let i = 1; i < arr.length; i++) {
 
@@ -225,7 +266,8 @@ async function insertionSort() {
 
         highlight(i, "red");
 
-        await sleep(getSpeed());
+        let speedInMS = getSpeed();
+        await sleep(speedInMS);
 
         while (j >= 0 && arr[j] > key) {
 
@@ -234,9 +276,8 @@ async function insertionSort() {
             highlight(j, "green");
             highlight(j + 1, "green");
 
-            await sleep(getSpeed());
-
-            runTimer(startTime);
+            speedInMS = getSpeed();
+            await sleep(speedInMS);
 
             arr[j + 1] = arr[j];
 
@@ -247,7 +288,8 @@ async function insertionSort() {
             j--;
 
 
-            await sleep(getSpeed());
+            speedInMS = getSpeed();
+            await sleep(speedInMS);
         }
 
         arr[j + 1] = key;
@@ -255,23 +297,16 @@ async function insertionSort() {
 
         resetColor(i);
 
-        await sleep(getSpeed());
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
     }
 
-    runTimer(startTime);
 
-    let graph_bar = document.createElement("div");
-    graph_bar.style.backgroundColor = "yellow";
-    let graph_bar_height = Number(timeSeconds.innerText.slice(0, -1));
-    graph_bar.style.height = `${graph_bar_height}%`;
-    graph.append(graph_bar);
 }
 
 async function selectionSort() {
 
-    timeComplexityValue.innerText = "O(n²)";
-    spaceComplexityValue.innerText = "O(1)";
-    let startTime = startTimer();
+
 
     for (let i = 0; i < arr.length - 1; i++) {
         let minIndex = i;
@@ -283,34 +318,31 @@ async function selectionSort() {
             highlight(i, "green");
             highlight(j, "green");
 
-            await sleep(getSpeed());
+            let speedInMS = getSpeed();
+            await sleep(speedInMS);
 
-            runTimer(startTime);
 
             if (arr[j] < arr[minIndex]) {
                 minIndex = j;
                 highlight(minIndex, "red");
-                await sleep(getSpeed());
+                speedInMS = getSpeed();
+                await sleep(speedInMS);
+
             }
 
             resetColor(i);
             resetColor(j);
         }
 
-        await sleep(getSpeed());
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
 
         swap(i, minIndex);
         resetColor(minIndex);
 
     }
 
-    runTimer(startTime);
 
-    let graph_bar = document.createElement("div");
-    graph_bar.style.backgroundColor = "orange";
-    let graph_bar_height = Number(timeSeconds.innerText.slice(0, -1));
-    graph_bar.style.height = `${graph_bar_height}%`;
-    graph.append(graph_bar);
 }
 
 async function partition(low, high) {
@@ -323,14 +355,19 @@ async function partition(low, high) {
         highlight(j, "green");
         highlight(high, "purple");
 
-        await sleep(getSpeed());
+        let speedInMS = getSpeed();
+        await sleep(speedInMS);
+
 
         if (arr[j] <= pivot) {
 
             i++;
             highlight(i, "red");
             highlight(j, "red");
-            await sleep(getSpeed());
+
+            speedInMS = getSpeed();
+            await sleep(speedInMS);
+
             swap(i, j);
 
             resetColor(j);
@@ -341,13 +378,16 @@ async function partition(low, high) {
         resetColor(high);
     }
 
-    await checkIfPaused();
+    speedInMS = getSpeed();
+    await sleep(speedInMS);
+
     highlight(i + 1, "red");
     highlight(high, "purple");
 
     swap(i + 1, high);
 
-    await sleep(getSpeed());
+    speedInMS = getSpeed();
+    await sleep(speedInMS);
 
     resetColor(i + 1);
     resetColor(high);
@@ -387,23 +427,44 @@ async function merge(low, mid, high) {
 
     while (i < left.length && j < right.length) {
 
+        highlight(i, "green");
+        highlight(j, "green");
+
         await checkIfPaused();
 
+        let speedInMS = getSpeed();
+        await sleep(speedInMS);
+
+        highlight(k, "red");
 
         if (left[i] <= right[j]) {
-
             arr[k] = left[i];
             i++;
+            let speedInMS = getSpeed();
+            await sleep(speedInMS);
+            resetColor(i);
 
         }
         else {
             arr[k] = right[j];
             j++;
+            let speedInMS = getSpeed();
+            await sleep(speedInMS);
+            resetColor(j);
         }
 
         updateBar(k);
 
-        await sleep(getSpeed());
+        await checkIfPaused();
+        resetColor(k);
+        resetColor(i);
+        resetColor(j);
+
+
+
+
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
 
 
         k++;
@@ -411,26 +472,51 @@ async function merge(low, mid, high) {
 
     while (i < left.length) {
 
+        highlight(i, "green");
         await checkIfPaused();
+
+        let speedInMS = getSpeed();
+        await sleep(speedInMS);
+
+        highlight(k, "red");
         arr[k] = left[i];
+        resetColor(i);
         i++;
 
         updateBar(k);
+
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
+        resetColor(k);
         k++;
 
-        await sleep(getSpeed());
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
+
     }
 
     while (j < right.length) {
 
+        highlight(j, "green");
         await checkIfPaused();
+
+        let speedInMS = getSpeed();
+        await sleep(speedInMS);
+
+        highlight(k, "red");
         arr[k] = right[j];
+        resetColor(j);
         j++;
 
         updateBar(k);
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
+        resetColor(k);
         k++;
 
-        await sleep(getSpeed());
+        speedInMS = getSpeed();
+        await sleep(speedInMS);
+
     }
 }
 
@@ -438,43 +524,106 @@ async function mergeSort(low, high) {
 
     if (low < high) {
         let mid = Math.floor(low + (high - low) / 2);
+        highlight(mid, "purple");
         await mergeSort(low, mid);
         await mergeSort(mid + 1, high);
 
         await merge(low, mid, high);
+        resetColor(mid);
 
     }
 }
 
 
 
+
 bubbleSortBtn.addEventListener("click", async () => {
+    bestTimeComplexity.innerText = "O(n)";
+    worstTimeComplexity.innerText = "O(n²)";
+    avgTimeComplexity.innerText = "O(n²)";
+
+    spaceComplexity.innerText = "O(1)";
+
     bubbleSortBtn.style.backgroundColor = "green";
     bubbleSortBtn.style.color = "white";
+
+    let startTime = startTimer();
     await bubbleSort();
+    stopTimer(startTime);
+
     bubbleSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     bubbleSortBtn.style.color = "blue";
+    
+
+    
+    let graph_bar = document.createElement("div");
+    let parent_bar = document.querySelector(".pre-bubble-sort-bar");
+    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+    graph_bar.style.width = `${graph_bar_width}%`;
+    graph_bar.innerText = `${graph_bar_width}s`;
+    parent_bar.innerHTML = "";
+    parent_bar.append(graph_bar);
 });
 
 insertionSortBtn.addEventListener("click", async () => {
+    bestTimeComplexity.innerText = "O(n)";
+    worstTimeComplexity.innerText = "O(n²)";
+    avgTimeComplexity.innerText = "O(n²)";
+
+    spaceComplexity.innerText = "O(1)";
+
     insertionSortBtn.style.backgroundColor = "green";
     insertionSortBtn.style.color = "white";
+
+    let startTime = startTimer();
     await insertionSort();
+    stopTimer(startTime);
+
     insertionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     insertionSortBtn.style.color = "blue";
+
+    let graph_bar = document.createElement("div");
+    let parent_bar = document.querySelector(".pre-insertion-sort-bar");
+    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+    graph_bar.style.width = `${graph_bar_width}%`;
+    graph_bar.innerText = `${graph_bar_width}s`;
+    parent_bar.innerHTML = "";
+    parent_bar.append(graph_bar);
 });
 
 selectionSortBtn.addEventListener("click", async () => {
+    bestTimeComplexity.innerText = "O(n²)";
+    worstTimeComplexity.innerText = "O(n²)";
+    avgTimeComplexity.innerText = "O(n²)";
+
+    spaceComplexity.innerText = "O(1)";
+
     selectionSortBtn.style.backgroundColor = "green";
     selectionSortBtn.style.color = "white";
+
+    let startTime = startTimer();
     await selectionSort();
+    stopTimer(startTime);
+
     selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     selectionSortBtn.style.color = "blue";
+
+    let graph_bar = document.createElement("div");
+    let parent_bar = document.querySelector(".pre-selection-sort-bar");
+    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+    graph_bar.style.width = `${graph_bar_width}%`;
+    graph_bar.innerText = `${graph_bar_width}s`;
+    parent_bar.innerHTML = "";
+    parent_bar.append(graph_bar);
 });
 
 quickSortBtn.addEventListener("click", async () => {
-    timeComplexityValue.innerText = "O(nlogn)";
-    spaceComplexityValue.innerText = "O(1)";
+
+    bestTimeComplexity.innerText = "O(n log n)";
+    worstTimeComplexity.innerText = "O(n²)";
+    avgTimeComplexity.innerText = "O(n log n)";
+
+    spaceComplexity.innerText = "O(1)";
 
     quickSortBtn.style.backgroundColor = "green";
     quickSortBtn.style.color = "white";
@@ -482,20 +631,26 @@ quickSortBtn.addEventListener("click", async () => {
     let startTime = startTimer();
     await quickSort(0, arr.length - 1);
     stopTimer(startTime);
-    
+
     quickSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     quickSortBtn.style.color = "blue";
 
     let graph_bar = document.createElement("div");
-    graph_bar.style.backgroundColor = "blue";
-    let graph_bar_height = Number(timeSeconds.innerText.slice(0, -1));
-    graph_bar.style.height = `${graph_bar_height}%`;
-    graph.append(graph_bar);
+    let parent_bar = document.querySelector(".pre-quick-sort-bar");
+    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+    graph_bar.style.width = `${graph_bar_width}%`;
+    graph_bar.innerText = `${graph_bar_width}s`;
+    parent_bar.innerHTML = "";
+    parent_bar.append(graph_bar);
 });
 
 mergeSortBtn.addEventListener("click", async () => {
-    timeComplexityValue.innerText = "O(nlogn)";
-    spaceComplexityValue.innerText = "O(n)";
+
+    bestTimeComplexity.innerText = "O(n log n)";
+    worstTimeComplexity.innerText = "O(n log n)";
+    avgTimeComplexity.innerText = "O(n log n)";
+
+    spaceComplexity.innerText = "O(n)";
 
     mergeSortBtn.style.backgroundColor = "green";
     mergeSortBtn.style.color = "white";
@@ -508,9 +663,11 @@ mergeSortBtn.addEventListener("click", async () => {
     mergeSortBtn.style.color = "blue";
 
     let graph_bar = document.createElement("div");
-    graph_bar.style.backgroundColor = "purple";
-    let graph_bar_height = Number(timeSeconds.innerText.slice(0, -1));
-    graph_bar.style.height = `${graph_bar_height}%`;
-    graph.append(graph_bar);
+    let parent_bar = document.querySelector(".pre-merge-sort-bar");
+    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+    graph_bar.style.width = `${graph_bar_width}%`;
+    graph_bar.innerText = `${graph_bar_width}s`;
+    parent_bar.innerHTML = "";
+    parent_bar.append(graph_bar);
 });
 

@@ -17,34 +17,35 @@
     </header>
     <div class="sub-heading">
         <div class="new-array-div">
-            <button id="new-array">new array</button>
+            <button id="new-array"><i class="fa-solid fa-repeat"></i></button>
         </div>
 
         <div class="size-container">
-            <p id="size-title">size of the array</p>
+            <p id="size-title">Size : 30</p>
             <input type="range" min="10" max="50" step="1" value="30" id="size-slider">
-            <div class="size-map">
+            <!-- <div class="size-map">
                 <p>10</p>
                 <p>20</p>
                 <p>30</p>
                 <p>40</p>
                 <p>50</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="speed-container">
-            <p id="speed-title">algorithm speed control</p>
+            <p id="speed-title">Speed : 100ms</p>
             <input type="range" min="1" max="5" step="1" value="3" id="speed-slider">
-            <div class="speed-map">
+            <!-- <div class="speed-map">
                 <p>min</p>
                 <p>med</p>
                 <p>max</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="pause-play">
-            <button class="pause-play-button"><i class="fa-solid fa-pause"></i></button>
-            <div class="pause-play-status">pause</div>
+
+            <button class="pause-play-button"><i class="fa-regular fa-circle-pause"></i></button>
+            <!-- <div class="pause-play-status">pause</div> -->
         </div>
 
         <div class="sorting-methods-div">
@@ -55,18 +56,49 @@
             <button class="sorting-methods" id="mergeSort">Merge Sort</button>
         </div>
     </div>
-    <div class="heights">
+
+    <div class="heights-container">
+
+        <div class="heights">
+
+        </div>
 
     </div>
+
     <div class="optInfo">
+
         <div class="timeComplexity">
             <div class="TCtext">
                 Time Complexity
             </div>
             <div class="timeComplexity-value">
-                -
+                <div class="best-case">
+                    <div class="best-case-text">
+                        Best Case
+                    </div>
+                    <div class="best-case-value">
+                        -
+                    </div>
+                </div>
+                <div class="avg-case">
+                    <div class="avg-case-text">
+                        Average Case
+                    </div>
+                    <div class="avg-case-value">
+                        -
+                    </div>
+                </div>
+                <div class="worst-case">
+                    <div class="worst-case-text">
+                        Worst Case
+                    </div>
+                    <div class="worst-case-value">
+                        -
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="spaceComplexity">
             <div class="SCtext">
                 Space Complexity
@@ -75,14 +107,17 @@
                 -
             </div>
         </div>
+
         <div class="time">
             <div class="time-text">
                 Time
             </div>
-            <div class="time-seconds">
+            <div class="time-value">
                 0.00s
             </div>
         </div>
+
+
     </div>
 
     <div class="graph-container">
@@ -90,29 +125,53 @@
             Note about graph
         </div>
         <div class="graph">
-            <div class="axis">
-                <div class="time-text-graph">
-                    <p>T</p>
-                    <p>I</p>
-                    <p>M</p>
-                    <p>E</p>
-                </div>
-                <div class="time-values">
-                    <p>100</p>
-                    <p>90</p>
-                    <p>80</p>
-                    <p>70</p>
-                    <p>60</p>
-                    <p>50</p>
-                    <p>40</p>
-                    <p>30</p>
-                    <p>20</p>
-                    <p>10</p>
+            <div class="graph-time-text">
+
+                <p>Time (in seconds) <i class="fa-solid fa-arrow-right-long"></i></p>
+
+                <div class="graph-time-values">
                     <p>0</p>
+                    <p>10</p>
+                    <p>20</p>
+                    <p>30</p>
+                    <p>40</p>
+                    <p>50</p>
+                    <p>60</p>
+                    <p>70</p>
+                    <p>80</p>
+                    <p>90</p>
+                    <p>100</p>
                 </div>
+            </div>
+
+            <div class="axis">
+                <div class="allSortingNames">
+                    <p>Bubble Sort</p>
+                    <p>Insertion Sort</p>
+                    <p>Selection Sort</p>
+                    <p>Quick Sort</p>
+                    <p>Merge Sort</p>
+                </div>
+
                 <div class="axis-box">
+                    <div class="pre-bubble-sort-bar pre-bar">
+
+                    </div>
+                    <div class="pre-insertion-sort-bar pre-bar">
+
+                    </div>
+                    <div class="pre-selection-sort-bar pre-bar">
+
+                    </div>
+                    <div class="pre-quick-sort-bar pre-bar">
+
+                    </div>
+                    <div class="pre-merge-sort-bar pre-bar">
+
+                    </div>
 
                 </div>
+
             </div>
         </div>
     </div>
