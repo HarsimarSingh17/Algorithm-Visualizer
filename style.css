@@ -11,15 +11,41 @@ header {
     width: 100%;
     height: 7vmin;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 2vmin;
+    position: relative;
 }
 
 header h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: lighter;
     color: white;
+    text-shadow: 2px 2px red;
+    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.more-button{
+    margin-right: 3vmin;
+    width: 5vmin;
+    height: 5vmin;
+    font-size: 3vmin;
+    background-color: rgb(37, 36, 36);
+    border: none;
+    border-radius: 7px;
+    color: white;
+
+    transition: background-color 0.34s ease, color 0.15s ease;
+
+}
+.more-button:hover{
+    background-color: rgb(24, 23, 23);
+}
+.more-button:active{
+    color: yellow;
 }
 
 .sub-heading {
@@ -123,6 +149,7 @@ header h1 {
     text-align: center;
     font-size: 3vmin;
     margin-bottom: 2vmin;
+    text-shadow: 2px 2px rgb(255, 0, 0);
 }
 .timeComplexity-value{
     width: 100%;
@@ -149,18 +176,21 @@ header h1 {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bolder;
     font-size: 2vmin;
+    color: yellow;
 }
 .best-case-text{
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bolder;
     font-size: 2vmin;
+    color: yellow;
 }
 .worst-case-text{
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bolder;
     font-size: 2vmin;
+    color: yellow;
 }
 
 .best-case-value{
@@ -202,6 +232,7 @@ header h1 {
     text-align: center;
     font-size: 3vmin;
     margin-bottom: 2vmin;
+    text-shadow: 2px 2px rgb(255, 0, 0);
 }
 .spaceComplexity-value{
     width: 100%;
@@ -218,6 +249,7 @@ header h1 {
     text-align: center;
     font-size: 3vmin;
     margin-bottom: 2vmin;
+    text-shadow: 2px 2px rgb(255, 0, 0);
 }
 .time-value{
     width: 100%;
@@ -455,7 +487,7 @@ header h1 {
 .allSortingNames p{
     width: 150%;
     height: 5vmin;
-    color: white;
+    color: yellow;
     font-size: 1.5vmin;
     font-weight: bolder;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -502,3 +534,13 @@ header h1 {
     font-weight: bold;
     font-size: 2vmin;
 }
+
+.pre-bar > p{
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2vmin;
+}
+
+
+

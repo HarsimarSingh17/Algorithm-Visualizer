@@ -19,6 +19,24 @@ let avgTimeComplexity = document.querySelector(".avg-case-value");
 let spaceComplexity = document.querySelector(".spaceComplexity-value");
 let timeDisplay = document.querySelector(".time-value");
 
+let moreButton = document.querySelector(".more-button");
+let sideMenu = document.querySelector(".side-menu");
+let closeButton = document.querySelector(".close-button");
+let menuOverlay = document.querySelector(".menu-overlay");
+
+moreButton.addEventListener("click", ()=>{
+    sideMenu.classList.add("active");
+    menuOverlay.classList.add("active");
+});
+closeButton.addEventListener("click", ()=>{
+    sideMenu.classList.remove("active");
+    menuOverlay.classList.remove("active");
+});
+menuOverlay.addEventListener("click", ()=>{
+    sideMenu.classList.remove("active");
+    menuOverlay.classList.remove("active");
+});
+
 
 for (let i = 0; i < n; i++) {
     arr.push(Math.floor(Math.random() * 100));
@@ -556,13 +574,16 @@ bubbleSortBtn.addEventListener("click", async () => {
     
 
     
+    let sortingTime = document.createElement("p");
+
     let graph_bar = document.createElement("div");
     let parent_bar = document.querySelector(".pre-bubble-sort-bar");
     let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
     graph_bar.style.width = `${graph_bar_width}%`;
-    graph_bar.innerText = `${graph_bar_width}s`;
+    sortingTime.innerText = `${graph_bar_width}s`;
     parent_bar.innerHTML = "";
     parent_bar.append(graph_bar);
+    parent_bar.append(sortingTime);
 });
 
 insertionSortBtn.addEventListener("click", async () => {
@@ -582,13 +603,16 @@ insertionSortBtn.addEventListener("click", async () => {
     insertionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     insertionSortBtn.style.color = "blue";
 
+    let sortingTime = document.createElement("p");
+
     let graph_bar = document.createElement("div");
     let parent_bar = document.querySelector(".pre-insertion-sort-bar");
     let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
     graph_bar.style.width = `${graph_bar_width}%`;
-    graph_bar.innerText = `${graph_bar_width}s`;
+    sortingTime.innerText = `${graph_bar_width}s`;
     parent_bar.innerHTML = "";
     parent_bar.append(graph_bar);
+    parent_bar.append(sortingTime);
 });
 
 selectionSortBtn.addEventListener("click", async () => {
@@ -608,13 +632,16 @@ selectionSortBtn.addEventListener("click", async () => {
     selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     selectionSortBtn.style.color = "blue";
 
+    let sortingTime = document.createElement("p");
+
     let graph_bar = document.createElement("div");
     let parent_bar = document.querySelector(".pre-selection-sort-bar");
     let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
     graph_bar.style.width = `${graph_bar_width}%`;
-    graph_bar.innerText = `${graph_bar_width}s`;
+    sortingTime.innerText = `${graph_bar_width}s`;
     parent_bar.innerHTML = "";
     parent_bar.append(graph_bar);
+    parent_bar.append(sortingTime);
 });
 
 quickSortBtn.addEventListener("click", async () => {
@@ -635,13 +662,16 @@ quickSortBtn.addEventListener("click", async () => {
     quickSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     quickSortBtn.style.color = "blue";
 
+    let sortingTime = document.createElement("p");
+
     let graph_bar = document.createElement("div");
     let parent_bar = document.querySelector(".pre-quick-sort-bar");
     let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
     graph_bar.style.width = `${graph_bar_width}%`;
-    graph_bar.innerText = `${graph_bar_width}s`;
+    sortingTime.innerText = `${graph_bar_width}s`;
     parent_bar.innerHTML = "";
     parent_bar.append(graph_bar);
+    parent_bar.append(sortingTime);
 });
 
 mergeSortBtn.addEventListener("click", async () => {
@@ -662,12 +692,15 @@ mergeSortBtn.addEventListener("click", async () => {
     mergeSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     mergeSortBtn.style.color = "blue";
 
+    let sortingTime = document.createElement("p");
+    
     let graph_bar = document.createElement("div");
     let parent_bar = document.querySelector(".pre-merge-sort-bar");
     let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
     graph_bar.style.width = `${graph_bar_width}%`;
-    graph_bar.innerText = `${graph_bar_width}s`;
+    sortingTime.innerText = `${graph_bar_width}s`;
     parent_bar.innerHTML = "";
     parent_bar.append(graph_bar);
+    parent_bar.append(sortingTime);
 });
 
