@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="more_options.css">
+    <link rel="stylesheet" href="graphAlgo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <div class="menu-overlay"></div>
+
+    <div class="side-menu">
+
+        <div class="side-bar-header">
+            <button class="close-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <h1>Algorithm Visualizer</h1>
+        </div>
+
+        <div class="side-menu-distinction-line"></div>
+
+        <div class="menu-options">
+            <button>Main Menu</button>
+            <button>Arrays</button>
+            <button>Linked Lists</button>
+            <button>Sorting Algorithms</button>
+            <button>Trees</button>
+            <button id="graph-menu-btn">Graphs</button>
+            <button>About Us</button>
+        </div>
+
+    </div>
+
+    <header>
+        <h1>Graph Algorithm Visualizer</h1>
+        <button class="more-button"><i class="fa-solid fa-bars"></i></button>
+    </header>
+    <div class="sub-heading">
+        <div class="new-maze-div">
+            <button id="new-maze"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+
+        <div class="speed-container">
+            <p id="speed-title">Speed : 100ms</p>
+            <input type="range" min="0" max="10" step="1" value="5" id="speed-slider">
+        </div>
+
+        <!-- <div class="row-slide-container">
+            <p id="row-title">Row : 15</p>
+            <input type="range" min="5" max="30" step="1" value="15" id="row-slider">
+        </div>
+
+        <div class="col-slide-container">
+            <p id="col-title">Col : 30</p>
+            <input type="range" min="5" max="50" step="1" value="25" id="col-slider">
+        </div> -->
+
+        <div class="pause-play">
+
+            <button class="pause-play-button"><i class="fa-regular fa-circle-pause"></i></button>
+        </div>
+
+        <div class="graph-algo-methods-div">
+            <button class="graph-algo-methods" id="bfsBtn">B.F.S.</button>
+            <button class="graph-algo-methods" id="dfsBtn">D.F.S.</button>
+            <button class="graph-algo-methods" id="dijkstraBtn">Dijkstra</button>
+            <button class="graph-algo-methods" id="aStarBtn">A*</button>
+        </div>
+    </div>
+
+    <div class="grid-container">
+
+        <div class="grid">
+            
+        </div>
+
+    </div>
+
+    <div class="optInfoNote">
+        
+    </div>
+
+    <div class="optInfo">
+
+        <div class="timeComplexity">
+            <div class="TCtext">
+                Time Complexity
+            </div>
+            <div class="timeComplexity-value">
+                <div class="best-case">
+                    <div class="best-case-text">
+                        Best Case
+                    </div>
+                    <div class="best-case-value">
+                        -
+                    </div>
+                </div>
+                <div class="avg-case">
+                    <div class="avg-case-text">
+                        Average Case
+                    </div>
+                    <div class="avg-case-value">
+                        -
+                    </div>
+                </div>
+                <div class="worst-case">
+                    <div class="worst-case-text">
+                        Worst Case
+                    </div>
+                    <div class="worst-case-value">
+                        -
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spaceComplexity">
+            <div class="SCtext">
+                Space Complexity
+            </div>
+            <div class="spaceComplexity-value">
+                -
+            </div>
+        </div>
+
+        <div class="time">
+            <div class="time-text">
+                Time
+            </div>
+            <div class="time-value">
+                0.00s
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="graph-container">
+        <div class="about-graph">
+            Note about graph
+        </div>
+        <div class="graph">
+
+            <div class="axis">
+                <div class="allGraphAlgoNames">
+                    <p>B.F.S.</p>
+                    <p>D.F.S.</p>
+                    <p>Dijkstra</p>
+                    <p>A*</p>
+                </div>
+
+                <div class="axis-box">
+                    <div class="pre-bfs-bar pre-bar">
+
+                    </div>
+                    <div class="pre-dfs-bar pre-bar">
+
+                    </div>
+                    <div class="pre-dijkstra-bar pre-bar">
+
+                    </div>
+                    <div class="pre-aStar-bar pre-bar">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class=".documentation-container">
+
+    </div>
+
+
+    <script src="graphAlgo.js"></script>
+    <script src="more_options.js"></script>
+</body>
+
+</html>

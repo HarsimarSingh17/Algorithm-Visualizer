@@ -1,0 +1,112 @@
+.side-menu{
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 50vmin;
+    height: 100vh;
+
+    background-color: rgb(37, 36, 36);
+    border-left: 2vmin solid red;
+    z-index: 100;
+
+    transform: translateX(100%);
+    transition: transform 0.5s ease;
+
+    padding: 3vmin;
+    box-sizing: border-box;
+}
+.side-menu.active{
+    transform: translateX(0);
+}
+
+.side-bar-header{
+    width: 100%;
+    height: 5vmin;
+    display: flex;
+    align-items: center;
+    justify-content:start;
+    gap: 2vmin;
+}
+
+.side-menu h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 4.2vmin;
+    font-weight: lighter;
+    color: white;
+    text-shadow: 2px 2px red;
+}
+
+.close-button{
+    width: 5vmin;
+    height: 5vmin;
+    font-size: 3vmin;
+    background-color: rgb(37, 36, 36);
+    border: none;
+    border-radius: 7px;
+    color: white;
+
+    transition: background-color 0.34s ease, color 0.15s ease;
+}
+.side-menu-distinction-line{
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    margin-top: 2vmin;
+    margin-bottom: 2vmin;
+}
+
+.close-button:hover{
+    background-color: rgb(24, 23, 23);
+}
+.close-button:active{
+    color: yellow;
+}
+
+.menu-overlay{
+    transition: opacity 0.5s ease;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background-color: black;
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 99;
+
+    
+}
+.menu-overlay.active{
+    visibility: visible;
+    opacity: 0.6;
+}
+.menu-options{
+    width: 100%;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.menu-options button{
+    width: 100%;
+    height: 5vmin;
+    border: none;
+    color: black;
+    font-size: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    text-align: start;
+    border-radius: 7px;
+    box-shadow: 3px 3px red;
+    padding: 1vmin;
+
+    transition: box-shadow 0.25s ease;
+}
+.menu-options button:hover{
+    box-shadow: 4px 4px blue;
+}

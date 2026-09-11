@@ -138,6 +138,7 @@ function startTimer() {
         let currentTime = performance.now();
         let elapsedTime = (currentTime - startTime) / 1000;
 
+
         timeDisplay.innerHTML = `${elapsedTime.toFixed(3)}s`;
 
         timerAnimation = requestAnimationFrame(updateTimer);
@@ -217,13 +218,11 @@ pause_play_btn.addEventListener("click", () => {
         pause_play_btn.innerHTML = "";
         pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-play'></i>";
         pauseScene = true;
-        pause_play_status.innerText = "play";
     }
     else {
         pause_play_btn.innerHTML = "";
         pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
         pauseScene = false;
-        pause_play_status.innerText = "pause";
     }
 
 });
