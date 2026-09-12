@@ -104,6 +104,18 @@ header h1 {
     color: blue;
 }
 
+.warning{
+    margin: 1vmin auto 1vmin;
+    width: 95%;
+    height: 2vmin;
+    color: white;
+    font-size: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-content: last baseline;
+}
+
 .grid-container{
     width: 80%;
     height: 65vh;

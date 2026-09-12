@@ -13,6 +13,9 @@ let pause_play_status = document.querySelector(".pause-play-status");
 
 let pauseScene = false;
 
+let pausedTime = 0;
+let pauseStartedAt = 0;
+
 let bestTimeComplexity = document.querySelector(".best-case-value");
 let worstTimeComplexity = document.querySelector(".worst-case-value");
 let avgTimeComplexity = document.querySelector(".avg-case-value");
@@ -24,15 +27,25 @@ let sideMenu = document.querySelector(".side-menu");
 let closeButton = document.querySelector(".close-button");
 let menuOverlay = document.querySelector(".menu-overlay");
 
-moreButton.addEventListener("click", ()=>{
+let isBubbleSortRunning = false;
+let isSelectionSortRunning = false;
+let isInsertionSortRunning = false;
+let isQuickSortRunning = false;
+let isMergeSortRunning = false;
+
+let stopAlgorithm = false;
+
+let warningNote = document.querySelector(".warningNote");
+
+moreButton.addEventListener("click", () => {
     sideMenu.classList.add("active");
     menuOverlay.classList.add("active");
 });
-closeButton.addEventListener("click", ()=>{
+closeButton.addEventListener("click", () => {
     sideMenu.classList.remove("active");
     menuOverlay.classList.remove("active");
 });
-menuOverlay.addEventListener("click", ()=>{
+menuOverlay.addEventListener("click", () => {
     sideMenu.classList.remove("active");
     menuOverlay.classList.remove("active");
 });
@@ -107,7 +120,6 @@ speedBar.addEventListener("input", () => {
 });
 
 
-
 sizeBar.addEventListener("input", () => {
     bestTimeComplexity.innerText = "-";
     worstTimeComplexity.innerText = "-";
@@ -120,6 +132,7 @@ sizeBar.addEventListener("input", () => {
     let size = Number(sizeBar.value);
     sizeTitle.innerText = `Size : ${size}`;
     generateArray();
+    warningNote.innerText = "";
 });
 
 let timerRunning = false;
@@ -134,13 +147,11 @@ function startTimer() {
         if (timerRunning == false) {
             return;
         }
-
-        let currentTime = performance.now();
-        let elapsedTime = (currentTime - startTime) / 1000;
-
-
-        timeDisplay.innerHTML = `${elapsedTime.toFixed(3)}s`;
-
+        if (pauseScene == false) {
+            let currentTime = performance.now();
+            let elapsedTime = (currentTime - startTime - Number(pausedTime)) / 1000;
+            timeDisplay.innerHTML = `${elapsedTime.toFixed(3)}s`;
+        }
         timerAnimation = requestAnimationFrame(updateTimer);
     }
 
@@ -150,12 +161,18 @@ function startTimer() {
 }
 
 function stopTimer(startTimer) {
+    if (stopAlgorithm) {
+        timerRunning = false;
+        cancelAnimationFrame(timerAnimation);
+        timeDisplay.innerText = "0.00s";
+        return;
+    }
     timerRunning = false;
     cancelAnimationFrame(timerAnimation);
 
     let endTime = performance.now();
 
-    let elapsedTime = (endTime - startTimer) / 1000;
+    let elapsedTime = (endTime - startTimer - Number(pausedTime)) / 1000;
 
     timeDisplay.innerText = `${elapsedTime.toFixed(3)}s`;
 }
@@ -200,17 +217,49 @@ function highlight(i, color) {
 
 newArrBtn.addEventListener("click", () => {
 
+    if (isBubbleSortRunning || isInsertionSortRunning || isMergeSortRunning || isQuickSortRunning || isSelectionSortRunning) {
+
+        if (pauseScene) {
+            pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
+            pauseScene = false;
+        }
+
+        stopAlgorithm = true;
+
+        return;
+
+    }
+
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
+
+
+
     bestTimeComplexity.innerText = "-";
     worstTimeComplexity.innerText = "-";
     avgTimeComplexity.innerText = "-";
+
+    quickSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    quickSortBtn.style.color = "blue";
+
+    mergeSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    mergeSortBtn.style.color = "blue";
+
+    selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    selectionSortBtn.style.color = "blue";
+
+    bubbleSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    bubbleSortBtn.style.color = "blue";
+
+    insertionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
+    insertionSortBtn.style.color = "blue";
 
     spaceComplexity.innerText = "-";
     timeDisplay.innerText = "0.00s"
 
 
     generateArray();
-
-
 });
 
 pause_play_btn.addEventListener("click", () => {
@@ -218,21 +267,21 @@ pause_play_btn.addEventListener("click", () => {
         pause_play_btn.innerHTML = "";
         pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-play'></i>";
         pauseScene = true;
+        pauseStartedAt = performance.now();
     }
     else {
         pause_play_btn.innerHTML = "";
         pause_play_btn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
         pauseScene = false;
+        pausedTime += performance.now() - pauseStartedAt;
     }
 
 });
 
 function resetColor(i) {
     let bar1 = document.querySelector(`#height${i}`);
-    // let bar2 = document.querySelector(`#height${j}`);
 
     bar1.style.backgroundColor = `yellow`;
-    // bar2.style.backgroundColor = `yellow`;
 }
 
 let bubbleSortBtn = document.querySelector("#bubbleSort");
@@ -245,9 +294,18 @@ async function bubbleSort() {
 
     for (let i = 0; i < arr.length; i++) {
         let flag = 0;
+
+        if (stopAlgorithm) {
+            return;
+        }
+
         for (let j = 0; j < arr.length - i - 1; j++) {
 
             await checkIfPaused();
+
+            if (stopAlgorithm) {
+                return;
+            }
 
             highlight(j, "green");
             highlight(j + 1, "green");
@@ -278,6 +336,12 @@ async function insertionSort() {
 
     for (let i = 1; i < arr.length; i++) {
 
+        await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
         let key = arr[i];
         let j = i - 1;
 
@@ -289,6 +353,10 @@ async function insertionSort() {
         while (j >= 0 && arr[j] > key) {
 
             await checkIfPaused();
+
+            if (stopAlgorithm) {
+                return;
+            }
 
             highlight(j, "green");
             highlight(j + 1, "green");
@@ -328,9 +396,19 @@ async function selectionSort() {
     for (let i = 0; i < arr.length - 1; i++) {
         let minIndex = i;
 
+        await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
         for (let j = i + 1; j < arr.length; j++) {
 
             await checkIfPaused();
+
+            if (stopAlgorithm) {
+                return;
+            }
 
             highlight(i, "green");
             highlight(j, "green");
@@ -365,12 +443,23 @@ async function selectionSort() {
 async function partition(low, high) {
     let pivot = arr[high];
 
+    await checkIfPaused();
+
+    if (stopAlgorithm) {
+        return;
+    }
+
     let i = low - 1;
     for (let j = low; j < high; j++) {
 
         await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
         highlight(j, "green");
-        highlight(high, "purple");
+        highlight(high, "green");
 
         let speedInMS = getSpeed();
         await sleep(speedInMS);
@@ -399,7 +488,7 @@ async function partition(low, high) {
     await sleep(speedInMS);
 
     highlight(i + 1, "red");
-    highlight(high, "purple");
+    highlight(high, "green");
 
     swap(i + 1, high);
 
@@ -415,6 +504,10 @@ async function partition(low, high) {
 
 async function quickSort(low, high) {
 
+    if (stopAlgorithm) {
+        return;
+    }
+
 
     if (low < high) {
         let pi = await partition(low, high);
@@ -426,6 +519,12 @@ async function quickSort(low, high) {
 }
 
 async function merge(low, mid, high) {
+
+    await checkIfPaused();
+
+    if (stopAlgorithm) {
+        return;
+    }
 
     let left = [];
     let right = [];
@@ -444,38 +543,43 @@ async function merge(low, mid, high) {
 
     while (i < left.length && j < right.length) {
 
-        highlight(i, "green");
-        highlight(j, "green");
-
         await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
+        let leftIndex = low + i;
+        let rightIndex = mid + 1 + j;
+
+        highlight(leftIndex, "green");
+        highlight(rightIndex, "green");
+        highlight(k, "red");
 
         let speedInMS = getSpeed();
         await sleep(speedInMS);
-
-        highlight(k, "red");
 
         if (left[i] <= right[j]) {
             arr[k] = left[i];
             i++;
             let speedInMS = getSpeed();
             await sleep(speedInMS);
-            resetColor(i);
-
         }
         else {
             arr[k] = right[j];
             j++;
             let speedInMS = getSpeed();
             await sleep(speedInMS);
-            resetColor(j);
+            // resetColor(j);
         }
 
         updateBar(k);
 
         await checkIfPaused();
+
         resetColor(k);
-        resetColor(i);
-        resetColor(j);
+        resetColor(leftIndex);
+        resetColor(rightIndex);
 
 
 
@@ -489,15 +593,21 @@ async function merge(low, mid, high) {
 
     while (i < left.length) {
 
-        highlight(i, "green");
         await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
+        let leftIndex = low + i;
+        highlight(leftIndex, "green");
+
 
         let speedInMS = getSpeed();
         await sleep(speedInMS);
 
         highlight(k, "red");
         arr[k] = left[i];
-        resetColor(i);
         i++;
 
         updateBar(k);
@@ -505,6 +615,7 @@ async function merge(low, mid, high) {
         speedInMS = getSpeed();
         await sleep(speedInMS);
         resetColor(k);
+        resetColor(leftIndex);
         k++;
 
         speedInMS = getSpeed();
@@ -514,21 +625,27 @@ async function merge(low, mid, high) {
 
     while (j < right.length) {
 
-        highlight(j, "green");
         await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
+
+        let rightIndex = mid + 1 + j;
+        highlight(rightIndex, "green");
 
         let speedInMS = getSpeed();
         await sleep(speedInMS);
 
         highlight(k, "red");
         arr[k] = right[j];
-        resetColor(j);
         j++;
 
         updateBar(k);
         speedInMS = getSpeed();
         await sleep(speedInMS);
         resetColor(k);
+        resetColor(rightIndex);
         k++;
 
         speedInMS = getSpeed();
@@ -539,9 +656,13 @@ async function merge(low, mid, high) {
 
 async function mergeSort(low, high) {
 
+    if (stopAlgorithm) {
+        return;
+    }
+
     if (low < high) {
         let mid = Math.floor(low + (high - low) / 2);
-        highlight(mid, "purple");
+        highlight(mid, "red");
         await mergeSort(low, mid);
         await mergeSort(mid + 1, high);
 
@@ -555,6 +676,33 @@ async function mergeSort(low, high) {
 
 
 bubbleSortBtn.addEventListener("click", async () => {
+
+    if (isInsertionSortRunning || isMergeSortRunning || isQuickSortRunning || isSelectionSortRunning) {
+        if (isInsertionSortRunning) {
+            warningNote.innerText = "Insertion Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isMergeSortRunning) {
+            warningNote.innerText = "Merge Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isQuickSortRunning) {
+            warningNote.innerText = "Quick Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isSelectionSortRunning) {
+            warningNote.innerText = "Selection Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+    }
+
+    stopAlgorithm = false;
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
+    isBubbleSortRunning = true;
+    sizeBar.disabled = true;
+
     bestTimeComplexity.innerText = "O(n)";
     worstTimeComplexity.innerText = "O(n²)";
     avgTimeComplexity.innerText = "O(n²)";
@@ -565,27 +713,65 @@ bubbleSortBtn.addEventListener("click", async () => {
     bubbleSortBtn.style.color = "white";
 
     let startTime = startTimer();
+
     await bubbleSort();
+
     stopTimer(startTime);
+
+
 
     bubbleSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     bubbleSortBtn.style.color = "blue";
-    
 
-    
-    let sortingTime = document.createElement("p");
+    if (!stopAlgorithm) {
+        let sortingTime = document.createElement("p");
 
-    let graph_bar = document.createElement("div");
-    let parent_bar = document.querySelector(".pre-bubble-sort-bar");
-    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
-    graph_bar.style.width = `${graph_bar_width}%`;
-    sortingTime.innerText = `${graph_bar_width}s`;
-    parent_bar.innerHTML = "";
-    parent_bar.append(graph_bar);
-    parent_bar.append(sortingTime);
+        let graph_bar = document.createElement("div");
+        let parent_bar = document.querySelector(".pre-bubble-sort-bar");
+        let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+        graph_bar.style.width = `${graph_bar_width}%`;
+        sortingTime.innerText = `${graph_bar_width}s`;
+        parent_bar.innerHTML = "";
+        parent_bar.append(graph_bar);
+        parent_bar.append(sortingTime);
+
+    }
+
+
+    isBubbleSortRunning = false;
+    warningNote.innerText = "";
+    sizeBar.disabled = false;
+    stopAlgorithm = false;
 });
 
 insertionSortBtn.addEventListener("click", async () => {
+
+    if (isBubbleSortRunning || isMergeSortRunning || isQuickSortRunning || isSelectionSortRunning) {
+        if (isBubbleSortRunning) {
+            warningNote.innerText = "Bubble Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isMergeSortRunning) {
+            warningNote.innerText = "Merge Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isQuickSortRunning) {
+            warningNote.innerText = "Quick Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isSelectionSortRunning) {
+            warningNote.innerText = "Selection Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+    }
+
+    isInsertionSortRunning = true;
+    sizeBar.disabled = true;
+
+    stopAlgorithm = false;
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestTimeComplexity.innerText = "O(n)";
     worstTimeComplexity.innerText = "O(n²)";
     avgTimeComplexity.innerText = "O(n²)";
@@ -596,25 +782,63 @@ insertionSortBtn.addEventListener("click", async () => {
     insertionSortBtn.style.color = "white";
 
     let startTime = startTimer();
+
     await insertionSort();
+
     stopTimer(startTime);
+
 
     insertionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     insertionSortBtn.style.color = "blue";
 
-    let sortingTime = document.createElement("p");
+    if (!stopAlgorithm) {
+        let sortingTime = document.createElement("p");
 
-    let graph_bar = document.createElement("div");
-    let parent_bar = document.querySelector(".pre-insertion-sort-bar");
-    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
-    graph_bar.style.width = `${graph_bar_width}%`;
-    sortingTime.innerText = `${graph_bar_width}s`;
-    parent_bar.innerHTML = "";
-    parent_bar.append(graph_bar);
-    parent_bar.append(sortingTime);
+        let graph_bar = document.createElement("div");
+        let parent_bar = document.querySelector(".pre-inserstion-sort-bar");
+        let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+        graph_bar.style.width = `${graph_bar_width}%`;
+        sortingTime.innerText = `${graph_bar_width}s`;
+        parent_bar.innerHTML = "";
+        parent_bar.append(graph_bar);
+        parent_bar.append(sortingTime);
+
+    }
+
+    isInsertionSortRunning = false;
+    warningNote.innerText = "";
+    sizeBar.disabled = false;
+    stopAlgorithm = false;
 });
 
 selectionSortBtn.addEventListener("click", async () => {
+
+    if (isBubbleSortRunning || isMergeSortRunning || isQuickSortRunning || isInsertionSortRunning) {
+        if (isBubbleSortRunning) {
+            warningNote.innerText = "Bubble Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isMergeSortRunning) {
+            warningNote.innerText = "Merge Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isQuickSortRunning) {
+            warningNote.innerText = "Quick Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isInsertionSortRunning) {
+            warningNote.innerText = "Insertion Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+    }
+
+    isSelectionSortRunning = true;
+    sizeBar.disabled = true;
+
+    stopAlgorithm = false;
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestTimeComplexity.innerText = "O(n²)";
     worstTimeComplexity.innerText = "O(n²)";
     avgTimeComplexity.innerText = "O(n²)";
@@ -625,25 +849,62 @@ selectionSortBtn.addEventListener("click", async () => {
     selectionSortBtn.style.color = "white";
 
     let startTime = startTimer();
+
     await selectionSort();
+
     stopTimer(startTime);
+
 
     selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     selectionSortBtn.style.color = "blue";
 
-    let sortingTime = document.createElement("p");
+    if (!stopAlgorithm) {
+        let sortingTime = document.createElement("p");
 
-    let graph_bar = document.createElement("div");
-    let parent_bar = document.querySelector(".pre-selection-sort-bar");
-    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
-    graph_bar.style.width = `${graph_bar_width}%`;
-    sortingTime.innerText = `${graph_bar_width}s`;
-    parent_bar.innerHTML = "";
-    parent_bar.append(graph_bar);
-    parent_bar.append(sortingTime);
+        let graph_bar = document.createElement("div");
+        let parent_bar = document.querySelector(".pre-selection-sort-bar");
+        let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+        graph_bar.style.width = `${graph_bar_width}%`;
+        sortingTime.innerText = `${graph_bar_width}s`;
+        parent_bar.innerHTML = "";
+        parent_bar.append(graph_bar);
+        parent_bar.append(sortingTime);
+
+    }
+
+    isSelectionSortRunning = false;
+    warningNote.innerText = "";
+    sizeBar.disabled = false;
+    stopAlgorithm = false;
 });
 
 quickSortBtn.addEventListener("click", async () => {
+
+    if (isBubbleSortRunning || isMergeSortRunning || isSelectionSortRunning || isInsertionSortRunning) {
+        if (isBubbleSortRunning) {
+            warningNote.innerText = "Bubble Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isMergeSortRunning) {
+            warningNote.innerText = "Merge Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isSelectionSortRunning) {
+            warningNote.innerText = "Selection Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isInsertionSortRunning) {
+            warningNote.innerText = "Insertion Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+    }
+
+    isQuickSortRunning = true;
+    sizeBar.disabled = true;
+
+    stopAlgorithm = false;
+    pauseStartedAt = 0;
+    pausedTime = 0;
 
     bestTimeComplexity.innerText = "O(n log n)";
     worstTimeComplexity.innerText = "O(n²)";
@@ -655,25 +916,64 @@ quickSortBtn.addEventListener("click", async () => {
     quickSortBtn.style.color = "white";
 
     let startTime = startTimer();
+
     await quickSort(0, arr.length - 1);
+
     stopTimer(startTime);
+
 
     quickSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     quickSortBtn.style.color = "blue";
 
-    let sortingTime = document.createElement("p");
+    if (!stopAlgorithm) {
 
-    let graph_bar = document.createElement("div");
-    let parent_bar = document.querySelector(".pre-quick-sort-bar");
-    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
-    graph_bar.style.width = `${graph_bar_width}%`;
-    sortingTime.innerText = `${graph_bar_width}s`;
-    parent_bar.innerHTML = "";
-    parent_bar.append(graph_bar);
-    parent_bar.append(sortingTime);
+        let sortingTime = document.createElement("p");
+
+        let graph_bar = document.createElement("div");
+        let parent_bar = document.querySelector(".pre-quick-sort-bar");
+        let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+        graph_bar.style.width = `${graph_bar_width}%`;
+        sortingTime.innerText = `${graph_bar_width}s`;
+        parent_bar.innerHTML = "";
+        parent_bar.append(graph_bar);
+        parent_bar.append(sortingTime);
+
+    }
+
+    isQuickSortRunning = false;
+    warningNote.innerText = "";
+    sizeBar.disabled = false;
+    stopAlgorithm = false;
+
 });
 
 mergeSortBtn.addEventListener("click", async () => {
+
+    if (isBubbleSortRunning || isQuickSortRunning || isSelectionSortRunning || isInsertionSortRunning) {
+        if (isBubbleSortRunning) {
+            warningNote.innerText = "Bubble Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isQuickSortRunning) {
+            warningNote.innerText = "Quick Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isSelectionSortRunning) {
+            warningNote.innerText = "Selection Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+        else if (isInsertionSortRunning) {
+            warningNote.innerText = "Insertion Sort is already under process. Kindly wait for the algorithm to be executed.";
+            return;
+        }
+    }
+
+    isMergeSortRunning = true;
+    sizeBar.disabled = true;
+
+    stopAlgorithm = false;
+    pauseStartedAt = 0;
+    pausedTime = 0;
 
     bestTimeComplexity.innerText = "O(n log n)";
     worstTimeComplexity.innerText = "O(n log n)";
@@ -685,21 +985,33 @@ mergeSortBtn.addEventListener("click", async () => {
     mergeSortBtn.style.color = "white";
 
     let startTime = startTimer();
+
     await mergeSort(0, arr.length - 1);
+
     stopTimer(startTime);
+
 
     mergeSortBtn.style.backgroundColor = "rgb(37, 36, 36)";
     mergeSortBtn.style.color = "blue";
 
-    let sortingTime = document.createElement("p");
-    
-    let graph_bar = document.createElement("div");
-    let parent_bar = document.querySelector(".pre-merge-sort-bar");
-    let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
-    graph_bar.style.width = `${graph_bar_width}%`;
-    sortingTime.innerText = `${graph_bar_width}s`;
-    parent_bar.innerHTML = "";
-    parent_bar.append(graph_bar);
-    parent_bar.append(sortingTime);
+    if (!stopAlgorithm) {
+
+        let sortingTime = document.createElement("p");
+
+        let graph_bar = document.createElement("div");
+        let parent_bar = document.querySelector(".pre-merge-sort-bar");
+        let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
+        graph_bar.style.width = `${graph_bar_width}%`;
+        sortingTime.innerText = `${graph_bar_width}s`;
+        parent_bar.innerHTML = "";
+        parent_bar.append(graph_bar);
+        parent_bar.append(sortingTime);
+
+    }
+
+    isMergeSortRunning = false;
+    warningNote.innerText = "";
+    sizeBar.disabled = false;
+    stopAlgorithm = false;
 });
 

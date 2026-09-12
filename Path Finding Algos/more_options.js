@@ -1,6 +1,6 @@
-const graph_btn = document.querySelector("#graph-menu-btn");
+let pFvisual_btn = document.querySelector("#PathFindingVisualizer");
 
-graph_btn.addEventListener("click", () => {
+pFvisual_btn.addEventListener("click", () => {
     window.open("graphAlgo/graphAlgo.html", "_blank");
 });
 
@@ -32,6 +32,20 @@ const spaceCompValue = document.querySelector(".spaceComplexity-value");
 const noteForComplexity = document.querySelector(".optInfoNote");
 
 let speedAdjustBar = document.querySelector("#speed-slider");
+
+let isBFSrunning = false;
+let isDFSrunning = false;
+let isDijkstraRunning = false;
+let isAStarRunning = false;
+
+let stopAlgorithm = false;
+
+const warningNote = document.querySelector(".warning");
+
+const bfsBtn = document.querySelector("#bfsBtn");
+const dfsBtn = document.querySelector("#dfsBtn");
+const dijkstraBtn = document.querySelector("#dijkstraBtn");
+const aStarBtn = document.querySelector("#aStarBtn");
 
 
 function createGrid() {
@@ -69,6 +83,11 @@ function createGrid() {
             grid.appendChild(cell);
         }
     }
+
+    isBFSrunning = false;
+    isDFSrunning = false;
+    isDijkstraRunning = false;
+    isAStarRunning = false;
 
     timeDisplay.innerText = "0.00s";
 }
@@ -196,6 +215,16 @@ createStartAndEnd();
 let newGrid = document.querySelector("#new-maze");
 
 newGrid.addEventListener("click", () => {
+    if (isAStarRunning || isBFSrunning || isDFSrunning || isDijkstraRunning) {
+
+        stopAlgorithm = true;
+
+        if (pauseScene) {
+            pauseScene = false;
+            pausePlayBtn.innerHTML = "";
+            pausePlayBtn.innerHTML = "<i class='fa-regular fa-circle-pause'></i>";
+        }
+    }
 
     bestCaseTC.innerText = "-";
     avgCaseTC.innerText = "-";
@@ -275,6 +304,13 @@ async function startTimer() {
 
 async function stopTimer(startingTime) {
 
+    if (stopAlgorithm) {
+        timeDisplay.innerText = "0.00s";
+        timeRunning = false;
+        cancelAnimationFrame(timeAnimation);
+        return;
+    }
+
     timeRunning = false;
     cancelAnimationFrame(timeAnimation);
 
@@ -292,7 +328,9 @@ function sleep(ms) {
 async function checkIfPaused() {
 
     while (pauseScene) {
+
         await sleep(100);
+
     }
 }
 
@@ -301,6 +339,10 @@ async function reconstructionPath(previous) {
     let currNode = endNode;
 
     while (currNode !== startNode) {
+
+        if (stopAlgorithm) {
+            return;
+        }
 
         currNode = previous.get(currNode);
         currNode.classList.add("path");
@@ -349,6 +391,10 @@ async function bfs() {
 
     while (maxHeap.length > 0) {
 
+        if (stopAlgorithm) {
+            return;
+        }
+
         await checkIfPaused();
 
         const currNode = maxHeap.shift();
@@ -359,7 +405,7 @@ async function bfs() {
 
         if (currNode === endNode) {
             console.log("Found");
-            reconstructionPath(previous);
+            await reconstructionPath(previous);
             return;
         }
 
@@ -368,6 +414,10 @@ async function bfs() {
         for (const neighbour of neighbours) {
 
             await checkIfPaused();
+
+            if (stopAlgorithm) {
+                return;
+            }
 
             if (visited.has(neighbour)) {
                 continue;
@@ -386,9 +436,29 @@ async function bfs() {
     console.log("No Path");
 }
 
-const bfsBtn = document.querySelector("#bfsBtn");
+
 
 bfsBtn.addEventListener("click", async () => {
+    if (isDFSrunning || isDijkstraRunning || isAStarRunning) {
+
+        if (isDFSrunning) {
+            warningNote.innerText = "DFS is already running. Kindly wait for the whole process to be executed";
+        }
+        else if (isDijkstraRunning) {
+            warningNote.innerText = "Dijkstra Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+        else {
+            warningNote.innerText = "A* Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+
+        return;
+    }
+    isBFSrunning = true;
+    stopAlgorithm = false;
+
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestCaseTC.innerText = "O(1)";
     avgCaseTC.innerText = "O(V + E)";
     worstCaseTC.innerText = "O(V + E)";
@@ -402,10 +472,18 @@ bfsBtn.addEventListener("click", async () => {
     let startingTime = await startTimer();
     await bfs();
     stopTimer(startingTime);
+    if (stopAlgorithm) {
+        timeDisplay.innerText = "0.00s";
+    }
     bfsBtn.style.backgroundColor = "rgb(37, 36, 36)";
     bfsBtn.style.color = "blue";
 
-    generateGraph("bfs");
+    if (!stopAlgorithm) {
+        generateGraph("bfs");
+    }
+
+    isBFSrunning = false;
+    warningNote.innerText = "";
 });
 
 //dfs
@@ -421,6 +499,10 @@ async function dfs() {
     while (stack.length > 0) {
 
         await checkIfPaused();
+
+        if (stopAlgorithm) {
+            return;
+        }
 
         const currNode = stack.pop();
         currNode.classList.add("visited");
@@ -439,6 +521,10 @@ async function dfs() {
 
             await checkIfPaused();
 
+            if (stopAlgorithm) {
+                return;
+            }
+
             if (visited.has(neighbour)) {
                 continue;
             }
@@ -456,9 +542,29 @@ async function dfs() {
     console.log("No path");
 }
 
-const dfsBtn = document.querySelector("#dfsBtn");
+
 
 dfsBtn.addEventListener("click", async () => {
+    if (isBFSrunning || isDijkstraRunning || isAStarRunning) {
+
+        if (isBFSrunning) {
+            warningNote.innerText = "BFS is already running. Kindly wait for the whole process to be executed";
+        }
+        else if (isDijkstraRunning) {
+            warningNote.innerText = "Dijkstra Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+        else {
+            warningNote.innerText = "A* Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+
+        return;
+    }
+    isDFSrunning = true;
+    stopAlgorithm = false;
+
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestCaseTC.innerText = "O(1)";
     avgCaseTC.innerText = "O(V + E)";
     worstCaseTC.innerText = "O(V + E)";
@@ -472,10 +578,17 @@ dfsBtn.addEventListener("click", async () => {
     let startingTime = await startTimer();
     await dfs();
     stopTimer(startingTime);
+    if (stopAlgorithm) {
+        timeDisplay.innerText = "0.00s";
+    }
     dfsBtn.style.backgroundColor = "rgb(37, 36, 36)";
     dfsBtn.style.color = "blue";
+    isDFSrunning = false;
 
-    generateGraph("dfs");
+    if (!stopAlgorithm) {
+        generateGraph("dfs");
+    }
+    warningNote.innerText = "";
 });
 
 //dijkstra
@@ -515,6 +628,10 @@ async function dijkstra() {
 
     while (unvisited.size > 0) {
 
+        if (stopAlgorithm) {
+            return;
+        }
+
         await checkIfPaused();
 
         const current = getClosestNode(unvisited, distances);
@@ -547,6 +664,10 @@ async function dijkstra() {
 
             await checkIfPaused();
 
+            if (stopAlgorithm) {
+                return;
+            }
+
             if (!unvisited.has(neighbour)) {
                 continue;
             }
@@ -569,9 +690,29 @@ async function dijkstra() {
     console.log("No Path");
 }
 
-const dijkstraBtn = document.querySelector("#dijkstraBtn");
+
 
 dijkstraBtn.addEventListener("click", async () => {
+    if (isBFSrunning || isDFSrunning || isAStarRunning) {
+
+        if (isBFSrunning) {
+            warningNote.innerText = "BFS is already running. Kindly wait for the whole process to be executed";
+        }
+        else if (isDFSrunning) {
+            warningNote.innerText = "DFS is already running. Kindly wait for the whole process to be executed";
+        }
+        else {
+            warningNote.innerText = "A* Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+
+        return;
+    }
+    isDijkstraRunning = true;
+    stopAlgorithm = false;
+
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestCaseTC.innerText = "O(1)*";
     avgCaseTC.innerText = "O((V + E) log V)";
     worstCaseTC.innerText = "O((V + E) log V)";
@@ -585,10 +726,17 @@ dijkstraBtn.addEventListener("click", async () => {
     let startingTime = await startTimer();
     await dijkstra();
     stopTimer(startingTime);
+    if (stopAlgorithm) {
+        timeDisplay.innerText = "0.00s";
+    }
     dijkstraBtn.style.backgroundColor = "rgb(37, 36, 36)";
     dijkstraBtn.style.color = "blue";
 
-    generateGraph("dijkstra");
+    if (!stopAlgorithm) {
+        generateGraph("dijkstra");
+    }
+    isDijkstraRunning = false;
+    warningNote.innerText = "";
 });
 
 
@@ -646,6 +794,10 @@ async function aStar() {
 
         await checkIfPaused();
 
+        if (stopAlgorithm) {
+            return;
+        }
+
         const currNode = getLowestScore(openSet, fScore);
 
         if (currNode === null) {
@@ -672,6 +824,10 @@ async function aStar() {
         for (const neighbour of neighbours) {
 
             await checkIfPaused();
+
+            if (stopAlgorithm) {
+                return;
+            }
 
             if (neighbour.classList.contains("wall")) {
                 continue;
@@ -701,9 +857,29 @@ async function aStar() {
 
 }
 
-const aStarBtn = document.querySelector("#aStarBtn");
+
 
 aStarBtn.addEventListener("click", async () => {
+    if (isBFSrunning || isDijkstraRunning || isDFSrunning) {
+
+        if (isBFSrunning) {
+            warningNote.innerText = "BFS is already running. Kindly wait for the whole process to be executed";
+        }
+        else if (isDijkstraRunning) {
+            warningNote.innerText = "Dijkstra Algrorithm is already running. Kindly wait for the whole process to be executed";
+        }
+        else {
+            warningNote.innerText = "DFS is already running. Kindly wait for the whole process to be executed";
+        }
+
+        return;
+    }
+    isAStarRunning = true;
+    stopAlgorithm = false;
+
+    pauseStartedAt = 0;
+    pausedTime = 0;
+
     bestCaseTC.innerText = "O(1)*";
     avgCaseTC.innerText = "Heuristic-Dependent";
     worstCaseTC.innerText = "O((V + E) log V)";
@@ -717,10 +893,17 @@ aStarBtn.addEventListener("click", async () => {
     let startingTime = await startTimer();
     await aStar();
     stopTimer(startingTime);
+    if (stopAlgorithm) {
+        timeDisplay.innerText = "0.00s";
+    }
     aStarBtn.style.backgroundColor = "rgb(37, 36, 36)";
     aStarBtn.style.color = "blue";
 
-    generateGraph("aStar");
+    if (!stopAlgorithm) {
+        generateGraph("aStar");
+    }
+    isAStarRunning = false;
+    warningNote.innerText = "";
 });
 
 //graph work
@@ -741,65 +924,40 @@ function generateGraph(algorithm) {
     graphBar.append(graphTimeDisplay);
 }
 
-//header sliders
-
-// function updateGrid(){
-
-//     gridRows = Number(rowAdjustBar.value);
-//     gridCols = Number(colAdjustBar.value);
-
-//     grid.innerHTML = "";
-
-//     createGrid();
-//     createStartAndEnd();
-
-//     timeDisplay.innerText = "-";
-
-//     bestCaseTC.innerText = "-";
-//     avgCaseTC.innerText = "-";
-//     worstCaseTC.innerText = "-";
-
-//     spaceCompValue.innerText = "-";
-
-// }
-
-// rowAdjustBar.addEventListener("input", updateGrid);
-// colAdjustBar.addEventListener("input", updateGrid);
-
-function getSpeed(){
+function getSpeed() {
     let speed = Number(speedAdjustBar.value);
 
-    if(speed==10){
+    if (speed == 10) {
         return 0;
     }
-    else if(speed==9){
+    else if (speed == 9) {
         return 15;
     }
-    else if(speed==8){
+    else if (speed == 8) {
         return 30;
     }
-    else if(speed==7){
+    else if (speed == 7) {
         return 45;
     }
-    else if(speed==6){
+    else if (speed == 6) {
         return 60;
     }
-    else if(speed==5){
+    else if (speed == 5) {
         return 75;
-    } 
-    else if(speed==4){
+    }
+    else if (speed == 4) {
         return 90;
-    } 
-    else if(speed==3){
+    }
+    else if (speed == 3) {
         return 105;
-    } 
-    else if(speed==2){
+    }
+    else if (speed == 2) {
         return 120;
-    } 
-    else if(speed==1){
+    }
+    else if (speed == 1) {
         return 135;
-    } 
-    else{
+    }
+    else {
         return 150;
     }
 }
