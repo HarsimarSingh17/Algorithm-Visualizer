@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="graphDocs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="more_options.css">
+</head>
+
+<body>
+    <header>
+        <h1>Documents</h1>
+        <button class="more-button"><i class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <div class="side-menu">
+
+        <div class="side-bar-header">
+            <button class="close-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <h1>Algorithm Visualizer</h1>
+        </div>
+
+        <div class="side-menu-distinction-line"></div>
+
+        <div class="menu-options">
+            <button id="mainMenuSideBtn">Main Menu</button>
+            <button id="sortingAlgoSideBtn">Sorting Algorithms</button>
+            <button id="graphSideBtn">Path Finding Algorithms</button>
+            <button id="sortingDocsSideBtn">Sorting Algorithm Documents</button>
+            <button id="graphDocsSideBtn">Path Finding Algorithms Documents</button>
+        </div>
+
+    </div>
+
+    <div class="startingPage">
+        <div class="graphTitle">
+            <h1>Path Finding Algorithm Documents</h1>
+        </div>
+        <div class="graphContent">
+            <p>Path Finding Algorithms are used to find a route between a starting point and a destination in a graph or
+                grid. They help solve problems involving navigation, route planning, and shortest-path discovery. The
+                Algorithm Visualizer demonstrates how different path finding algorithms explore nodes, avoid obstacles,
+                and discover routes step by step.
+
+                Explore BFS (Breadth-First Search) to find the shortest path in an unweighted grid, DFS
+                (Depth-First Search) to explore paths deeply before backtracking, Dijkstra’s Algorithm to find the
+                shortest path using distance costs, and A* Search to efficiently find a path using both actual
+                distance and a heuristic estimate. Compare their exploration strategies, path lengths, and efficiency to
+                understand how each algorithm works.</p>
+        </div>
+    </div>
+
+    <div class="bubbleSortContent">
+
+        <div class="bubbleSortTitle">
+            Breadth-First Search (BFS)
+        </div>
+
+        <div class="bubbleSortInsideContent">
+
+            <div class="bubbleContentOne">
+                Breadth-First Search (BFS) is a graph traversal algorithm that explores nodes level by level, starting
+                from a given source node. It visits all neighboring nodes before moving to the next level, using a queue
+                to keep track of nodes waiting to be explored.
+
+                BFS is widely used in pathfinding, network traversal, and finding the shortest path in unweighted
+                graphs. In a grid-based pathfinding visualizer, it explores neighboring cells, avoids obstacles, and
+                continues until it reaches the destination or determines that no path exists. BFS guarantees the
+                shortest path when all edges have equal cost, but it may explore many unnecessary nodes in large search
+                spaces.
+            </div>
+
+            <div class="bubbleImgSlide">
+                <img src="./Images/BFS Grid Walkthrough_ Iterations 0–8.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="bubbleSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="bubbleCpp">C++</button>
+                    <button class="bubbleC">C</button>
+                    <button class="bubbleJava">Java</button>
+                    <button class="bubblePython">Python</button>
+                </div>
+
+
+                <div class="bubbleSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="bubbleComplexity">
+                <div class="bubbleTC">
+                    Time Complexity: O(V+E)
+                </div>
+                <div class="bubbleSC">
+                    Space Complexity: O(V)
+                </div>
+            </div>
+
+            <div class="bubbleProsAndCons">
+                <div class="bubblePros">
+                    <h1>Advantages of BFS Algorithm: </h1>
+                    <pre>
+                        1. It guarantees the shortest path in an unweighted graph.
+                        2. It explores nodes systematically, level by level.
+                        3. It is complete, meaning it finds a solution if one exists in a finite graph.
+                        4. It is useful for maze solving, network traversal, and pathfinding applications.
+                    </pre>
+
+                </div>
+
+                <div class="bubbleCons">
+                    <h1>Disadvantages of BFS Algorithm: </h1>
+                    <pre>
+                        1. It can consume a large amount of memory to store nodes in the queue.
+                        2. It may explore many nodes that are not part of the final path.
+                        3. It can be inefficient for large graphs with many vertices and edges.
+                        4. It does not consider different movement costs, so it is unsuitable for finding the cheapest path in weighted graphs.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="selectionSortContent">
+
+        <div class="selectionSortTitle">
+            Depth-First Search (DFS)
+        </div>
+
+        <div class="selectionSortInsideContent">
+
+            <div class="selectionContentOne">
+                Depth-First Search (DFS) is a graph traversal algorithm that explores a path as deeply as possible
+                before backtracking to explore other paths. It starts from a source node and visits connected, unvisited
+                nodes until it reaches a dead end or the target node.
+
+                DFS uses a stack or recursion to keep track of nodes during exploration. In a grid-based pathfinding
+                visualizer, it explores neighboring cells, avoids obstacles, and backtracks when no further progress is
+                possible. DFS is useful for maze solving, graph traversal, and exploring connected components, but it
+                does not guarantee the shortest path between the start and destination.
+            </div>
+
+            <div class="selectionImgSlide">
+                <img src="./Images/Step-by-Step DFS Traversal Infographic.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="selectionSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="selectionCpp">C++</button>
+                    <button class="selectionC">C</button>
+                    <button class="selectionJava">Java</button>
+                    <button class="selectionPython">Python</button>
+                </div>
+
+
+                <div class="selectionSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="selectionComplexity">
+                <div class="selectionTC">
+                    Time Complexity: O(V+E)
+                </div>
+                <div class="selectionSC">
+                    Space Complexity: O(V)
+                </div>
+            </div>
+
+            <div class="selectionProsAndCons">
+                <div class="selectionPros">
+                    <h1>Advantages of DFS: </h1>
+                    <pre>
+                        1. It is simple to implement using recursion or a stack.
+                        2. It generally requires less memory than BFS when exploring broad graphs, depending on the graph structure.
+                        3. It is useful for maze solving, cycle detection, and finding connected components.
+                        4. It can explore deep paths without storing an entire level of neighboring nodes.
+                    </pre>
+
+                </div>
+
+                <div class="selectionCons">
+                    <h1>Disadvantages of DFS: </h1>
+                    <pre>
+                        1. It does not guarantee the shortest path in an unweighted graph.
+                        2. It may explore a long, unnecessary path before finding the destination.
+                        3. Recursive implementations can cause stack overflow on very deep graphs.
+                        4. Its traversal order depends on the order in which neighboring nodes are explored.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="insertionSortContent">
+
+        <div class="insertionSortTitle">
+            Dijkstra’s Algorithm
+        </div>
+
+        <div class="insertionSortInsideContent">
+
+            <div class="insertionContentOne">
+                Dijkstra’s Algorithm is a graph traversal and shortest-path algorithm used to find the minimum-cost path
+                from a starting node to other nodes in a weighted graph. It works by repeatedly selecting the unvisited
+                node with the smallest known distance and updating the distances of its neighboring nodes.
+
+                The algorithm begins by assigning a distance of zero to the starting node and infinity to all other
+                nodes. At each step, it selects the closest unvisited node, explores its neighbors, and updates their
+                distances whenever a shorter path is discovered. This process continues until the destination is reached
+                or all reachable nodes have been explored.
+
+                Dijkstra’s Algorithm is widely used in GPS navigation, network routing, and pathfinding applications. It
+                guarantees the shortest path when all edge weights are non-negative, but it does not support negative
+                edge weights.
+            </div>
+
+            <div class="insertionImgSlide">
+                <img src="./Images/Dijkstra’s Algorithm_ Path to F.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="insertionSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="insertionCpp">C++</button>
+                    <button class="insertionC">C</button>
+                    <button class="insertionJava">Java</button>
+                    <button class="insertionPython">Python</button>
+                </div>
+
+
+                <div class="insertionSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="insertionComplexity">
+                <div class="insertionTC">
+                    Time Complexity: O((V + E) log V) using an adjacency list and a min-priority queue.
+                </div>
+                <div class="insertionSC">
+                    Space Complexity: O(V+E)
+                </div>
+            </div>
+
+            <div class="insertionProsAndCons">
+                <div class="insertionPros">
+                    <h1>Advantages of Dijkstra’s Algorithm: </h1>
+                    <pre>
+                        1. It guarantees the shortest path when all edge weights are non-negative.
+                        2. It efficiently finds minimum-cost paths in weighted graphs.
+                        3. It is widely used in GPS navigation and network routing.
+                        4. It can calculate the shortest distances from one source node to all reachable nodes.
+                    </pre>
+
+                </div>
+
+                <div class="insertionCons">
+                    <h1>Disadvantages of Dijkstra’s Algorithm: </h1>
+                    <pre>
+                        1. It does not work correctly with negative edge weights.
+                        2. It may explore many nodes that are not necessary to reach the destination.
+                        3. It can require additional memory to store distances, predecessors, and priority queue entries.
+                        4. It may be less efficient than A* Search for finding a specific destination when a useful heuristic is available.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="quickSortContent">
+
+        <div class="quickSortTitle">
+            A* Search
+        </div>
+
+        <div class="quickSortInsideContent">
+
+            <div class="quickContentOne">
+                A* (A-Star) Search is an informed pathfinding algorithm that finds an efficient path from a starting
+                node to a destination. It combines the actual cost of reaching a node with a heuristic estimate of the
+                remaining distance to the goal. By considering both values, A* intelligently prioritizes nodes that are
+                more promising.
+
+                The algorithm calculates a score for each node using the formula f(n) = g(n) + h(n), where g(n)
+                represents the cost from the starting node to the current node, and h(n) estimates the cost from the
+                current node to the destination. At each step, it explores the node with the lowest estimated total cost
+                and updates the scores of its neighbors when a better path is found.
+
+                A* is widely used in GPS navigation, video games, robotics, and grid-based pathfinding. With a suitable
+                heuristic, it can find the shortest path while exploring fewer nodes than uninformed algorithms such as
+                BFS. Its performance depends on the quality of the heuristic and the graph structure.
+            </div>
+
+            <div class="quickImgSlide">
+                <img src="./Images/A_ Algorithm Step-by-Step Infographic.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="quickSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="quickCpp">C++</button>
+                    <button class="quickC">C</button>
+                    <button class="quickJava">Java</button>
+                    <button class="quickPython">Python</button>
+                </div>
+
+
+                <div class="quickSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="quickComplexity">
+                <div class="quickTC">
+                    Time Complexity: Generally depends on the heuristic and graph structure; worst-case performance can
+                    be exponential in the search depth.
+                </div>
+                <div class="quickSC">
+                    Space Complexity: O(V) for storing explored nodes, scores, and parent references, excluding
+                    implementation-specific priority queue overhead.
+                </div>
+            </div>
+
+            <div class="quickProsAndCons">
+                <div class="quickPros">
+                    <h1>Advantages of A* Search: </h1>
+                    <pre>
+                        1. It can find the shortest path when the heuristic is admissible and the algorithm is implemented correctly.
+                        2. It uses heuristic guidance to prioritize promising routes toward the destination.
+                        3. It can explore fewer nodes than uninformed algorithms such as BFS in many practical problems.
+                        4. It is widely used in games, robotics, navigation, and pathfinding applications.
+                    </pre>
+
+                </div>
+
+                <div class="quickCons">
+                    <h1>Disadvantages of A* Search: </h1>
+                    <pre>
+                        1. It can consume significant memory to store discovered nodes, scores, and paths.
+                        2. Its performance depends heavily on the quality of the heuristic.
+                        3. A poor heuristic may cause it to explore many nodes, reducing its efficiency.
+                        4. It can be more complex to implement than BFS or DFS because it requires priority-based node selection and 
+                        cost updates.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="graphDocs.js"></script>
+    <script src="more_options.js"></script>
+</body>
+
+</html>

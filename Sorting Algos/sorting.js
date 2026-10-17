@@ -795,7 +795,7 @@ insertionSortBtn.addEventListener("click", async () => {
         let sortingTime = document.createElement("p");
 
         let graph_bar = document.createElement("div");
-        let parent_bar = document.querySelector(".pre-inserstion-sort-bar");
+        let parent_bar = document.querySelector(".pre-insertion-sort-bar");
         let graph_bar_width = Number(timeDisplay.innerText.slice(0, -1));
         graph_bar.style.width = `${graph_bar_width}%`;
         sortingTime.innerText = `${graph_bar_width}s`;
@@ -853,6 +853,10 @@ selectionSortBtn.addEventListener("click", async () => {
     await selectionSort();
 
     stopTimer(startTime);
+
+    if(stopAlgorithm){
+        timeDisplay.innerText = "0.00s";
+    }
 
 
     selectionSortBtn.style.backgroundColor = "rgb(37, 36, 36)";

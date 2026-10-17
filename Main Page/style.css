@@ -1,0 +1,406 @@
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+body{
+    background-color: rgb(37, 36, 36);
+}
+.header{
+    width: 95%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0;
+    margin: 1vmin auto 1vmin;
+    border: 2px solid rgb(123, 119, 119);
+    border-radius: 50px;
+
+}
+.title-header{
+    font-size: 5vmin;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    text-shadow: 4px 4px red;
+    margin-left: 2vmin;
+    transition: 0.4s ease text-shadow;
+}
+.title-header:hover{
+    text-shadow: 5px 5px blue;
+}
+
+.webOptions{
+    width: 60%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1vmin;
+}
+
+.webOptions div{
+    width: 15%;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.webOptions div p{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2.3vmin;
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    text-shadow: 2px 2px 2px black;
+
+    transition: 0.3s ease text-shadow, 0.3s ease font-size;
+    cursor: pointer;
+}
+.webOptions div p:hover{
+    text-shadow: 3px 3px red;
+    font-size: 2.5vmin;
+}
+
+/* main menu */
+.mainMenu{
+    width: 90%;
+    height: 70vh;
+    /* border: 2px solid yellow; */
+    margin: 3vmin auto 1vmin;
+    border-radius: 3vmin;
+}
+
+.introContent{
+    width: 100%;
+    height: 100%;
+    /* display: flex;
+    align-items:first baseline;
+    flex-wrap: wrap;
+    justify-content: center; */
+}
+.introTitle{
+    width: 100%;
+    height: 10%;
+    font-size: 5vmin;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+    text-shadow: 4px 4px red;
+    text-align: center;
+}
+.sortingContent{
+    width: 100%;
+    height: 40%;
+    align-self:auto;
+    border: 5px solid rgb(123, 119, 119);
+    border-radius: 6vmin;
+    margin-right: 1vmin;
+
+    transition: 0.2s ease border;
+}
+.sortingContent:hover{
+    border: 6px solid yellow;
+}
+.sortingContentTitle{
+    width: 100%;
+    height: 5vmin;
+    font-size: 3.5vmin;
+    font-family:fantasy;
+    color: white;
+    margin-left: 2vmin;
+    text-decoration: none;
+    transition: 0.3s ease text-decoration;
+}
+.sortingContentTitle:hover{
+    text-decoration: underline;
+}
+.sortingContentTitle i{
+    color: red;
+}
+.sortingContentWords{
+    width: 100%;
+    height: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(180, 178, 178);
+    margin-left: 2vmin;
+}
+.sortingContentImg{
+    margin-top: 2vmin;
+    width: 100%;
+    height: 30%;
+    
+}
+#sortingImg{
+    width: 80%;
+    height: 160%;
+    border: 2px solid red;
+    border-radius: 4vmin;
+}
+.graphContent{
+    width: 100%;
+    height: 40%;
+    border: 5px solid rgb(123, 119, 119);
+    margin-left: 1vmin;
+    transition: 0.2s ease border;
+    border-radius: 6vmin;
+}
+.graphContent:hover{
+    border: 6px solid red;
+}
+.graphContentTitle{
+    width: 100%;
+    height: 5vmin;
+    font-size: 3.5vmin;
+    font-family:fantasy;
+    color: white;
+    margin-left: 2vmin;
+    text-decoration: none;
+    transition: 0.3s ease text-decoration;
+}
+.graphContentTitle:hover{
+    text-decoration: underline;
+}
+.graphContentWords{
+    width: 100%;
+    height: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(180, 178, 178);
+    margin-left: 2vmin;
+}
+.graphContentTitle i{
+    color: yellow;
+}
+.visualizerContent{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 2vmin;
+    margin-bottom: 5vmin;
+}
+.docsContent{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vmin;
+    margin-top: 3vmin;
+    margin-bottom: 5vmin;
+}
+.sortingDocsDiv{
+    width: 100%;
+    height: 40%;
+    border: 5px solid rgb(123, 119, 119);
+    border-radius: 4vmin;
+    transition: 0.3s ease border;
+}
+.sortingDocsDiv:hover{
+    border: 6px solid red;
+}
+.sortingDocsTitle{
+    width: 100%;
+    height: 5vmin;
+    font-size: 3.5vmin;
+    font-family:fantasy;
+    color: white;
+    margin-left: 2vmin;
+    text-decoration: none;
+    transition: 0.3s ease text-decoration;
+    
+}
+.sortingDocsTitle i {
+    color: yellow;
+}
+.sortingDocsTitle:hover{
+    text-decoration: underline;
+}
+.graphsDocsDiv{
+    width: 100%;
+    height: 40%;
+    border: 5px solid rgb(123, 119, 119);
+    border-radius: 4vmin;
+    transition: 0.3s ease border;
+}
+.graphsDocsDiv:hover{
+    border: 6px solid yellow;
+}
+.graphsDocsTitle{
+    width: 100%;
+    height: 5vmin;
+    font-size: 3.5vmin;
+    font-family:fantasy;
+    color: white;
+    margin-left: 2vmin;
+    text-decoration: none;
+    transition: 0.3s ease text-decoration;
+}
+.graphsDocsTitle:hover{
+    text-decoration: underline;
+}
+.graphsDocsTitle i{
+    color: red;
+}
+.aboutUsMainPage{
+    width: 90%;
+    height: 40vh;
+    background-color: rgb(180, 178, 178);
+    border: 6px solid red;
+    border-radius: 3vmin;
+    margin: 0 auto 0;
+}
+.aboutUsTitle{
+    width: 100%;
+    height: 7vmin;
+    font-size: 4vmin;
+    color: red;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 2vmin auto 2vmin;
+    text-align: center;
+    margin-top: 5vmin;
+}
+
+.visHeading{
+    width: 100%;
+    height: 5vmin;
+
+    font-size: 4.5vmin;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+
+    text-shadow: 2px 2px black;
+    
+    /* margin-left: 2vmin; */
+    margin-bottom: 1vmin;
+
+    border-bottom: 5px solid white;
+
+    padding: 6px;
+    margin-top: 5vmin;
+}
+.docHeading{
+
+    width: 100%;
+    height: 5vmin;
+
+    font-size: 4.5vmin;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+
+    text-shadow: 2px 2px black;
+    
+    /* margin-left: 2vmin; */
+    margin-top: 3vmin;
+    margin-bottom: 1vmin;
+
+    border-bottom: 5px solid white;
+
+    padding: 6px;
+    margin-top: 5vmin;
+
+}
+
+.sortingDocsWords{
+    width: 100%;
+    height: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(180, 178, 178);
+    margin-left: 2vmin;
+}
+
+.graphDocsWords{
+    width: 100%;
+    height: 2vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: rgb(180, 178, 178);
+    margin-left: 2vmin; 
+}
+
+.imagesContainer{
+    width: 90%;
+    height: 60vh;
+    margin: 0 auto 0;
+    display: flex;
+    border: 5px solid rgb(180, 178, 178);
+    border-radius: 20px;
+
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    justify-content: flex-start;
+    align-self: center;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    gap: 2vmin;
+}
+.imgDiv{
+    flex: 0 0 70%;
+    height: 90%;
+    overflow: hidden;
+    margin: auto 0 auto;
+}
+.imgDiv img{
+    width: 100%;
+    height: 100%;
+    object-fit: fit;
+    display: block;
+    border-radius: 15px;
+}
+
+.aboutSection{
+    width: 100%;
+    height: 60vh;
+}
+.aboutTitle{
+    width: 100%;
+    height: 5vmin;
+
+    font-size: 4.5vmin;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+
+    text-shadow: 2px 2px black;
+    
+    margin-top: 7vmin;
+    margin-bottom: 1vmin;
+
+    border-bottom: 5px solid white;
+
+    padding: 6px;
+    
+}
+.aboutContent{
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    color: rgb(180, 178, 178);
+    margin-top: 3vmin;
+    margin-bottom: 10vmin;
+}
+.aboutWords{
+    width: 60%;
+    height: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2.5vmin;
+    text-align: start;
+    font-weight: bold;
+    color: white;
+}
+.aboutImages{
+    width: 30%;
+    height: 40%;
+    font-size: 40vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 4px 4px black;
+}

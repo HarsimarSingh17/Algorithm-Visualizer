@@ -1,0 +1,784 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+
+    background-color: rgb(37, 36, 36);
+    color: white;
+
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+}
+
+header {
+    width: 100%;
+    height: 7vmin;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2vmin;
+    position: relative;
+    border-bottom: 2px solid rgb(180, 178, 178);
+}
+
+header h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    color: white;
+    text-shadow: 2px 2px red;
+    
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.more-button{
+    margin-right: 3vmin;
+    width: 5vmin;
+    height: 5vmin;
+    font-size: 3vmin;
+    background-color: rgb(37, 36, 36);
+    border: none;
+    border-radius: 7px;
+    color: white;
+
+    transition: background-color 0.34s ease, color 0.15s ease;
+
+}
+.more-button:hover{
+    background-color: rgb(24, 23, 23);
+}
+.more-button:active{
+    color: yellow;
+}
+
+.startingPage{
+    width: 100%;
+    height: 70vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vmin;
+}
+
+.graphTitle{
+    width: 40%;
+    height: 70vh;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 7vmin;
+    font-weight: 0.5vmin;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-shadow: 4px 4px red;
+}
+
+.graphContent{
+    width: 50%;
+    height: 60%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 3vmin;
+}
+.graphContent p{
+    text-align: center;
+}
+
+.bubbleSortContent{
+    width: 80%;
+    height: fit-content;
+    border: 2px solid white;
+    margin: 3vmin auto 3vmin;
+}
+.bubbleSortTitle{
+    width: 100%;
+    height: 6vmin;
+    background-color: rgb(180, 178, 178);
+    color: rgb(37, 36, 36);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vmin;
+}
+
+.selectionSortContent{
+    width: 80%;
+    height: fit-content;
+    border: 2px solid white;
+    margin: 3vmin auto 3vmin;
+}
+.selectionSortTitle{
+    width: 100%;
+    height: 6vmin;
+    background-color: rgb(180, 178, 178);
+    color: rgb(37, 36, 36);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vmin;
+}
+
+.insertionSortContent{
+    width: 80%;
+    height: fit-content;
+    border: 2px solid white;
+    margin: 3vmin auto 3vmin;
+}
+.insertionSortTitle{
+    width: 100%;
+    height: 6vmin;
+    background-color: rgb(180, 178, 178);
+    color: rgb(37, 36, 36);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vmin;
+}
+
+.quickSortContent{
+    width: 80%;
+    height: fit-content;
+    border: 2px solid white;
+    margin: 3vmin auto 3vmin;
+}
+.quickSortTitle{
+    width: 100%;
+    height: 6vmin;
+    background-color: rgb(180, 178, 178);
+    color: rgb(37, 36, 36);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vmin;
+}
+
+.mergeSortContent{
+    width: 80%;
+    height: fit-content;
+    border: 2px solid white;
+    margin: 3vmin auto 3vmin;
+}
+.mergeSortTitle{
+    width: 100%;
+    height: 6vmin;
+    background-color: rgb(180, 178, 178);
+    color: rgb(37, 36, 36);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vmin;
+}
+
+.bubbleSortInsideContent{
+    width: 100%;
+    height: 70%;
+    margin: 1vmin auto 1vmin;
+
+
+}
+.bubbleContentOne{
+    width: 80%;
+    height: fit-content;
+    margin: 1vmin auto 1vmin;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.bubbleImgSlide{
+    width: 80%;
+    height: fit-content;
+    margin: 3vmin auto 3vmin;
+}
+.bubbleImgSlide img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.belowMessage{
+    width: 90%;
+    font-size: 2.7vmin;
+    height: fit-content;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 1vmin auto 1vmin;
+    font-weight: bold;
+}
+.bubbleSortCodes{
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    margin: 1vmin auto 1vmin;
+    border: 2px solid white;
+    border-radius: 7px;
+
+}
+.switchCodeBtnDiv{
+    width: 95%;
+    height: 5%;
+    margin: 3vmin auto 1vmin;
+    background-color: rgb(23, 23, 23);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1vmin;
+}
+.switchCodeBtnDiv button{
+    width: 10vmin;
+    height: 3vmin;
+    border-radius: 5px;
+    background-color: rgb(37, 36, 36);
+    color: white;
+    border: 2px solid rgb(180, 178, 178);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 2vmin;
+}
+.bubbleComplexity{
+    width: 90%;
+    height: 5%;
+    margin: 1vmin auto 1vmin;
+    font-size: 3vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.bubbleTC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+.bubbleSC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+
+.bubbleProsAndCons{
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    margin: 1vmin auto 1vmin;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.bubblePros{
+    width: 100%;
+    height: fit-content;
+}
+.bubblePros h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.bubblePros pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.bubbleCons{
+    width: 100%;
+    height: fit-content;
+}
+.bubbleCons h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.bubbleCons pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.bubbleSortCodeContent{
+    width: 85%;
+    font-size: 2.5vmin;
+    height: 90%;
+    margin: 0 auto 0;
+    background-color: rgb(23, 23, 23);
+    overflow-y: auto;
+}
+.bubbleSortCodeContent pre{
+    background-color: rgb(23, 23, 23);
+}
+.bubbleSortCodeContent pre code{
+    background-color: rgb(23, 23, 23);
+}
+
+
+/* selectionSort */
+
+.selectionSortInsideContent{
+    width: 100%;
+    height: 70%;
+    margin: 1vmin auto 1vmin;
+}
+.selectionContentOne{
+    width: 80%;
+    height: fit-content;
+    margin: 1vmin auto 1vmin;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.selectionImgSlide{
+    width: 80%;
+    height: fit-content;
+    margin: 3vmin auto 3vmin;
+}
+.selectionImgSlide img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.selectionSortCodes{
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    margin: 1vmin auto 1vmin;
+    border: 2px solid white;
+    border-radius: 7px;
+
+}
+.selectionComplexity{
+    width: 90%;
+    height: 5%;
+    margin: 1vmin auto 1vmin;
+    font-size: 3vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.selectionTC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+.selectionSC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+
+.selectionProsAndCons{
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    margin: 1vmin auto 1vmin;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.selectionPros{
+    width: 100%;
+    height: fit-content;
+}
+.selectionPros h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.selectionPros pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.selectionCons{
+    width: 100%;
+    height: fit-content;
+}
+.selectionCons h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.selectionCons pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.selectionSortCodeContent{
+    width: 85%;
+    font-size: 2.5vmin;
+    height: 90%;
+    margin: 0 auto 0;
+    background-color: rgb(23, 23, 23);
+    overflow-y: auto;
+}
+.selectionSortCodeContent pre{
+    background-color: rgb(23, 23, 23);
+}
+.selectionSortCodeContent pre code{
+    background-color: rgb(23, 23, 23);
+}
+
+
+
+/* insertion sort */
+
+.insertionSortInsideContent{
+    width: 100%;
+    height: 70%;
+    margin: 1vmin auto 1vmin;
+}
+.insertionContentOne{
+    width: 80%;
+    height: fit-content;
+    margin: 1vmin auto 1vmin;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.insertionImgSlide{
+    width: 80%;
+    height: fit-content;
+    margin: 3vmin auto 3vmin;
+}
+.insertionImgSlide img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.insertionSortCodes{
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    margin: 1vmin auto 1vmin;
+    border: 2px solid white;
+    border-radius: 7px;
+
+}
+.insertionComplexity{
+    width: 90%;
+    height: 5%;
+    margin: 1vmin auto 1vmin;
+    font-size: 3vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.insertionTC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+.insertionSC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+
+.insertionProsAndCons{
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    margin: 1vmin auto 1vmin;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.insertionPros{
+    width: 100%;
+    height: fit-content;
+}
+.insertionPros h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.insertionPros pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.insertionCons{
+    width: 100%;
+    height: fit-content;
+}
+.insertionCons h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.insertionCons pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.insertionSortCodeContent{
+    width: 85%;
+    font-size: 2.5vmin;
+    height: 90%;
+    margin: 0 auto 0;
+    background-color: rgb(23, 23, 23);
+    overflow-y: auto;
+}
+.insertionSortCodeContent pre{
+    background-color: rgb(23, 23, 23);
+}
+.insertionSortCodeContent pre code{
+    background-color: rgb(23, 23, 23);
+}
+
+
+/*quick sort */
+
+.quickSortInsideContent{
+    width: 100%;
+    height: 70%;
+    margin: 1vmin auto 1vmin;
+}
+.quickContentOne{
+    width: 80%;
+    height: fit-content;
+    margin: 1vmin auto 1vmin;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.quickImgSlide{
+    width: 80%;
+    height: fit-content;
+    margin: 3vmin auto 3vmin;
+}
+.quickImgSlide img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.quickSortCodes{
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    margin: 1vmin auto 1vmin;
+    border: 2px solid white;
+    border-radius: 7px;
+
+}
+.quickComplexity{
+    width: 90%;
+    height: 5%;
+    margin: 1vmin auto 1vmin;
+    font-size: 3vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.quickTC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+.quickSC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+
+.quickProsAndCons{
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    margin: 1vmin auto 1vmin;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.quickPros{
+    width: 100%;
+    height: fit-content;
+}
+.quickPros h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.quickPros pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.quickCons{
+    width: 100%;
+    height: fit-content;
+}
+.quickCons h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.quickCons pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.quickSortCodeContent{
+    width: 85%;
+    font-size: 2.5vmin;
+    height: 90%;
+    margin: 0 auto 0;
+    background-color: rgb(23, 23, 23);
+    overflow-y: auto;
+}
+.quickSortCodeContent pre{
+    background-color: rgb(23, 23, 23);
+}
+.quickSortCodeContent pre code{
+    background-color: rgb(23, 23, 23);
+}
+
+/* merge sort */
+
+.mergeSortInsideContent{
+    width: 100%;
+    height: 70%;
+    margin: 1vmin auto 1vmin;
+}
+.mergeContentOne{
+    width: 80%;
+    height: fit-content;
+    margin: 1vmin auto 1vmin;
+    font-size: 2.5vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.mergeImgSlide{
+    width: 80%;
+    height: fit-content;
+    margin: 3vmin auto 3vmin;
+}
+.mergeImgSlide img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+}
+.mergeSortCodes{
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    margin: 1vmin auto 1vmin;
+    border: 2px solid white;
+    border-radius: 7px;
+
+}
+.mergeComplexity{
+    width: 90%;
+    height: 5%;
+    margin: 1vmin auto 1vmin;
+    font-size: 3vmin;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.mergeTC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+.mergeSC{
+    margin: 3px;
+    width: 100%;
+    height: fit-content;
+    font-size: 2.5vmin;
+}
+
+.mergeProsAndCons{
+    width: 90%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    margin: 1vmin auto 1vmin;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.mergePros{
+    width: 100%;
+    height: fit-content;
+}
+.mergePros h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.mergePros pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.mergeCons{
+    width: 100%;
+    height: fit-content;
+}
+.mergeCons h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: lighter;
+    text-shadow: 3px 3px black;
+}
+.mergeCons pre{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.5vmin;
+    margin-top: 2vmin;
+}
+
+.mergeSortCodeContent{
+    width: 85%;
+    font-size: 2.5vmin;
+    height: 90%;
+    margin: 0 auto 0;
+    background-color: rgb(23, 23, 23);
+    overflow-y: auto;
+}
+.mergeSortCodeContent pre{
+    background-color: rgb(23, 23, 23);
+}
+.mergeSortCodeContent pre code{
+    background-color: rgb(23, 23, 23);
+}

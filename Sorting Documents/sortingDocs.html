@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithm Documents - Algorithm Visualizer</title>
+    <link rel="stylesheet" href="sortingDocs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="more_options.css">
+</head>
+
+<body>
+    <header>
+        <h1>Documents</h1>
+        <button class="more-button"><i class="fa-solid fa-bars"></i></button>
+    </header>
+
+    <div class="menu-overlay"></div>
+
+    <div class="side-menu">
+
+        <div class="side-bar-header">
+            <button class="close-button"><i class="fa-solid fa-arrow-left"></i></button>
+            <h1>Algorithm Visualizer</h1>
+        </div>
+
+        <div class="side-menu-distinction-line"></div>
+
+        <div class="menu-options">
+            <button id="mainMenuSideBtn">Main Menu</button>
+            <button id="sortingAlgoSideBtn">Sorting Algorithms</button>
+            <button id="graphSideBtn">Path Finding Algorithms</button>
+            <button id="sortingDocsSideBtn">Sorting Algorithm Documents</button>
+            <button id="graphDocsSideBtn">Path Finding Algorithms Documents</button>
+        </div>
+
+    </div>
+
+    <div class="startingPage">
+        <div class="sortingTitle">
+            <h1>Sorting Algorithm Documents</h1>
+        </div>
+        <div class="sortingContent">
+            <p>Sorting algorithms are an essential part of computer science, helping organize data efficiently and
+                systematically. Algorithm Visualizer makes learning these concepts easier through interactive
+                visualizations that demonstrate how different algorithms work step by step. Explore comparisons, swaps,
+                and element movements while understanding the logic behind each operation. From Bubble Sort to advanced
+                sorting techniques, discover how algorithms transform an unsorted array into an ordered sequence and
+                learn about their time complexity, efficiency, and practical applications.</p>
+        </div>
+    </div>
+
+    <div class="bubbleSortContent">
+
+        <div class="bubbleSortTitle">
+            Bubble Sort
+        </div>
+
+        <div class="bubbleSortInsideContent">
+
+            <div class="bubbleContentOne">
+                Bubble Sort is a basic sorting algorithm that arranges elements by comparing adjacent elements and
+                swapping them whenever they are in the wrong order. It repeatedly passes through the array until all
+                elements are sorted.
+
+                In each pass, adjacent elements are compared, and the larger element is moved towards the end of the
+                array.
+
+                After every pass, the largest unsorted element reaches its correct position.
+
+                The process continues with the remaining unsorted elements until the entire array is sorted.
+
+                Bubble Sort is easy to understand and implement, but it is less efficient for large datasets due to its
+                high time complexity.
+            </div>
+
+            <div class="bubbleImgSlide">
+                <img src="./Images/Bubble Sort Step-by-Step Visualization.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="bubbleSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="bubbleCpp">C++</button>
+                    <button class="bubbleC">C</button>
+                    <button class="bubbleJava">Java</button>
+                    <button class="bubblePython">Python</button>
+                </div>
+
+
+                <div class="bubbleSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="bubbleComplexity">
+                <div class="bubbleTC">
+                    Time Complexity: O(n<sup>2</sup>)
+                </div>
+                <div class="bubbleSC">
+                    Space Complexity: O(1)
+                </div>
+            </div>
+
+            <div class="bubbleProsAndCons">
+                <div class="bubblePros">
+                    <h1>Advantages of Bubble Sort: </h1>
+                    <pre>
+                        1. It is simple to learn and implement, making it suitable for beginners.
+                        2. It sorts elements in place, so it requires very little extra memory.
+                        3. It is a stable sorting algorithm that preserves the relative order of equal elements.
+                        4. Its optimized version can perform efficiently on small or nearly sorted arrays.
+                    </pre>
+
+                </div>
+
+                <div class="bubbleCons">
+                    <h1>Disadvantages of Bubble Sort: </h1>
+                    <pre>
+                        1. It has an average and worst-case time complexity of (O(n<sup>2</sup>)), making it inefficient for large datasets.
+                        2. It may require many comparisons and swaps to arrange elements in the correct order.
+                        3. It is generally slower than algorithms such as Merge Sort and Quick Sort for larger inputs.
+                        4. It is rarely used in practical applications because more efficient sorting algorithms are available.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="selectionSortContent">
+
+        <div class="selectionSortTitle">
+            Selection Sort
+        </div>
+
+        <div class="selectionSortInsideContent">
+
+            <div class="selectionContentOne">
+                Selection Sort is a simple sorting algorithm that sorts an array by repeatedly finding the smallest
+                element from the unsorted part and placing it at the beginning of that part. It divides the array into
+                sorted and unsorted sections and gradually expands the sorted section until all elements are arranged in
+                ascending order.
+
+                In each pass, the algorithm searches for the minimum element in the unsorted part of the array.
+                The minimum element is swapped with the first element of the unsorted section.
+                After each pass, one more element is placed in its correct position, expanding the sorted section.
+                The process continues until the entire array is sorted. Selection Sort is easy to understand and uses
+                very little extra memory, but it is inefficient for large datasets.
+            </div>
+
+            <div class="selectionImgSlide">
+                <img src="./Images/Selection Sort_ Step-by-Step Infographic.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="selectionSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="selectionCpp">C++</button>
+                    <button class="selectionC">C</button>
+                    <button class="selectionJava">Java</button>
+                    <button class="selectionPython">Python</button>
+                </div>
+
+
+                <div class="selectionSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="selectionComplexity">
+                <div class="selectionTC">
+                    Time Complexity: O(n<sup>2</sup>)
+                </div>
+                <div class="selectionSC">
+                    Space Complexity: O(1)
+                </div>
+            </div>
+
+            <div class="selectionProsAndCons">
+                <div class="selectionPros">
+                    <h1>Advantages of Selection Sort: </h1>
+                    <pre>
+                        1. It is simple to understand and implement, making it suitable for beginners.
+                        2. It sorts elements in place and requires very little extra memory.
+                        3. It performs fewer swaps compared with many other simple sorting algorithms.
+                        4. It works well for small datasets.
+                    </pre>
+
+                </div>
+
+                <div class="selectionCons">
+                    <h1>Disadvantages of Selection Sort: </h1>
+                    <pre>
+                        1. Its best, average, and worst-case time complexity is O(n<sup>2</sup>).
+                        2. It is inefficient for large datasets.
+                        3. It is generally not a stable sorting algorithm in its standard implementation.
+                        4. It does not adapt well to arrays that are already sorted.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="insertionSortContent">
+
+        <div class="insertionSortTitle">
+            Insertion Sort
+        </div>
+
+        <div class="insertionSortInsideContent">
+
+            <div class="insertionContentOne">
+                Insertion Sort is a simple sorting algorithm that arranges elements by taking one element at a time and
+                inserting it into its correct position in the already sorted part of the array. It divides the array
+                into sorted and unsorted sections and gradually builds the sorted section from left to right.
+
+                The algorithm starts with the first element, which is considered sorted.
+                In each pass, the next element is selected as the key and compared with the elements before it.
+                All elements greater than the key are shifted one position to the right to make space for it.
+                The key is inserted into its correct position, and the sorted section grows by one element.
+                The process continues until all elements are sorted. Insertion Sort is efficient for small or nearly
+                sorted arrays but is less suitable for large datasets.
+            </div>
+
+            <div class="insertionImgSlide">
+                <img src="./Images/Insertion Sort Step-by-Step Visualization.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="insertionSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="insertionCpp">C++</button>
+                    <button class="insertionC">C</button>
+                    <button class="insertionJava">Java</button>
+                    <button class="insertionPython">Python</button>
+                </div>
+
+
+                <div class="insertionSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="insertionComplexity">
+                <div class="insertionTC">
+                    Time Complexity: O(n<sup>2</sup>) (O(n) in the best case scenario)
+                </div>
+                <div class="insertionSC">
+                    Space Complexity: O(1)
+                </div>
+            </div>
+
+            <div class="insertionProsAndCons">
+                <div class="insertionPros">
+                    <h1>Advantages of Insertion Sort: </h1>
+                    <pre>
+                        1. It is simple to understand and implement, making it suitable for beginners.
+                        2. It requires very little extra memory because it sorts elements in place.
+                        3. It performs efficiently on small or nearly sorted arrays.
+                        4. It is a stable sorting algorithm that preserves the relative order of equal elements.
+                    </pre>
+
+                </div>
+
+                <div class="insertionCons">
+                    <h1>Disadvantages of Insertion Sort: </h1>
+                    <pre>
+                        1. Its average and worst-case time complexity is O(n²), making it inefficient for large datasets.
+                        2. It may require many comparisons and shifts when elements are in reverse order.
+                        3. It is generally slower than advanced sorting algorithms such as Merge Sort and Quick Sort for large inputs.
+                        4. Its performance decreases as the size of a randomly ordered array increases.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="quickSortContent">
+
+        <div class="quickSortTitle">
+            Quick Sort
+        </div>
+
+        <div class="quickSortInsideContent">
+
+            <div class="quickContentOne">
+                Quick Sort is an efficient sorting algorithm that arranges elements by selecting a pivot element and
+                partitioning the array around it. Elements smaller than the pivot are placed on its left, while larger
+                elements are placed on its right. The same process is then applied recursively to the left and right
+                subarrays until the entire array is sorted.
+
+                The algorithm selects a pivot element from the array.
+                It partitions the array by placing smaller elements before the pivot and larger elements after it.
+                The pivot reaches its correct sorted position after partitioning.
+                The process repeats recursively on the left and right subarrays until the array is completely sorted.
+                Quick Sort is generally fast in practice, especially for large datasets, and can sort elements in place.
+            </div>
+
+            <div class="quickImgSlide">
+                <img src="./Images/Quick Sort Divide-and-Conquer Infographic.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="quickSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="quickCpp">C++</button>
+                    <button class="quickC">C</button>
+                    <button class="quickJava">Java</button>
+                    <button class="quickPython">Python</button>
+                </div>
+
+
+                <div class="quickSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="quickComplexity">
+                <div class="quickTC">
+                    Time Complexity: O(nlogn) (O(n<sup>2</sup>) in the worst case scenario)
+                </div>
+                <div class="quickSC">
+                    Space Complexity: O(logn) (O(n) in the worst case scenario)
+                </div>
+            </div>
+
+            <div class="quickProsAndCons">
+                <div class="quickPros">
+                    <h1>Advantages of Quick Sort: </h1>
+                    <pre>
+                        1. It is efficient for large datasets in average cases.
+                        2. It can sort elements in place, requiring little extra memory for partitioning.
+                        3. It follows the divide-and-conquer approach, breaking a large problem into smaller subproblems.
+                        4. It often performs well in practical applications due to good cache efficiency.
+                    </pre>
+
+                </div>
+
+                <div class="quickCons">
+                    <h1>Disadvantages of Quick Sort: </h1>
+                    <pre>
+                        1. Its worst-case time complexity is O(n<sup>2</sup>).
+                        2. Its performance depends on the choice of pivot.
+                        3. It uses recursion, which can cause stack overhead.
+                        4. Standard Quick Sort is generally not a stable sorting algorithm.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mergeSortContent">
+
+        <div class="mergeSortTitle">
+            Merge Sort
+        </div>
+
+        <div class="mergeSortInsideContent">
+
+            <div class="mergeContentOne">
+                Merge Sort is an efficient sorting algorithm that uses the divide-and-conquer technique to arrange
+                elements in ascending order. It divides the array into smaller subarrays until each subarray contains
+                only one element. These subarrays are then merged back together in sorted order until the entire array
+                is sorted.
+
+                In each step, the array is divided into two halves. The process continues recursively until the smallest
+                subarrays are reached. The subarrays are then merged by comparing their elements and placing them in the
+                correct order. This process continues until a single sorted array is formed. Merge Sort is efficient for
+                large datasets and provides consistent performance, but it requires extra memory for merging.
+            </div>
+
+            <div class="mergeImgSlide">
+                <img src="./Images/Merge Sort Step-by-Step Infographic.png" alt="">
+            </div>
+
+            <div class="belowMessage">
+                Codes below :
+            </div>
+
+            <div class="mergeSortCodes">
+
+                <div class="switchCodeBtnDiv">
+                    <button class="mergeCpp">C++</button>
+                    <button class="mergeC">C</button>
+                    <button class="mergeJava">Java</button>
+                    <button class="mergePython">Python</button>
+                </div>
+
+
+                <div class="mergeSortCodeContent">
+
+                </div>
+
+            </div>
+
+            <div class="mergeComplexity">
+                <div class="mergeTC">
+                    Time Complexity: O(nlogn)
+                </div>
+                <div class="mergeSC">
+                    Space Complexity: O(n)
+                </div>
+            </div>
+
+            <div class="mergeProsAndCons">
+                <div class="mergePros">
+                    <h1>Advantages of Merge Sort: </h1>
+                    <pre>
+                        1. It efficiently sorts large datasets with a time complexity of O(n log n).
+                        2. It is a stable sorting algorithm that preserves the relative order of equal elements.
+                        3. It provides consistent performance in the best, average, and worst cases.
+                        4. It works well for sorting linked lists and large amounts of data.
+                    </pre>
+
+                </div>
+
+                <div class="mergeCons">
+                    <h1>Disadvantages of Merge Sort: </h1>
+                    <pre>
+                        1. It requires additional memory for merging subarrays.
+                        2. It can be more complex to implement than simple sorting algorithms.
+                        3. For small arrays, it may have more overhead than algorithms such as Insertion Sort.
+                        4. Its standard array implementation is not an in-place sorting algorithm.
+                    </pre>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="sortingDocs.js"></script>
+    <script src="more_options.js"></script>
+</body>
+
+</html>
